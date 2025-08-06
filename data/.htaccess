@@ -1,0 +1,9 @@
+# Protect data directory
+Order Allow,Deny
+Deny from all
+
+# Allow PHP scripts to access
+<Files "*.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
