@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Master Hurghada - Professional Diving Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+            --section-padding: 80px 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header.scrolled {
+            background: var(--white);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-dropdown.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown a:hover {
+            background: var(--light-blue);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .experience {
+            background: linear-gradient(rgba(0, 77, 117, 0.9), rgba(0, 119, 190, 0.9)), url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+        }
+
+        .section {
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Section */
+        .services {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--coral);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light-blue);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-top: 10px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .feature-content p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Video Section */
+        .video-section {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background: var(--primary-blue);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .video-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--coral);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experience-text {
+            text-align: left;
+        }
+
+        .experience-text h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .experience-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .experience-video {
+            position: relative;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .course-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--coral);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .course-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .course-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .course-button:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9));
+            z-index: 1;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section .section-title {
+            color: white;
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            font-weight: 300;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .cta-item {
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cta-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+
+        .cta-item h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cta-item p {
+            opacity: 0.95;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--light-blue);
+        }
+
+        .testimonials-slider {
+            margin: 0;
+            margin: 0 auto;
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: #FFD700;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .testimonial-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--coral);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--coral);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .developer-credit {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .experience-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .experience-text {
+                text-align: center;
+            }
+
+            .experience-text h2 {
+                font-size: 2rem;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-container iframe {
+                height: 250px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .service-card,
+            .course-card {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="daily-trips.html">Daily Trips</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="price-list.html">Price List</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 German</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polish</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 French</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Russian</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italian</a>
+                        <a href="#" onclick="changeLanguage('zh')">🇨🇳 Chinese</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" onclick="window.location.href='shopping-cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Discover the Red Sea</h1>
+            <p>Professional diving courses and unforgettable underwater adventures in Hurghada</p>
+            <a href="courses.html" class="cta-button">Start Your Adventure</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <!-- CMS Integration: Services content can be managed through admin panel -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Experience the best diving services in the Red Sea with our professional team</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Professional Courses</h3>
+                    <p>From beginner to advanced, we offer comprehensive PADI certified diving courses with experienced instructors in safe, controlled environments.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Daily Diving Trips</h3>
+                    <p>Explore the stunning coral reefs and marine life of the Red Sea with our guided daily diving trips to the most beautiful dive sites.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Equipment Rental</h3>
+                    <p>High-quality, well-maintained diving equipment available for rent. All gear is regularly serviced and meets international safety standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            <p class="section-subtitle">Why choose Pro Master Hurghada for your diving adventures</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>PADI Certified Instructors</h3>
+                        <p>Our team consists of highly qualified PADI certified instructors with years of experience in teaching and guiding divers of all levels.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Safety First</h3>
+                        <p>We prioritize safety above all else with modern equipment, comprehensive safety briefings, and strict adherence to diving protocols.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Best Dive Sites</h3>
+                        <p>Access to the most spectacular dive sites in the Red Sea, featuring vibrant coral reefs, diverse marine life, and underwater wrecks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience">
+        <div class="container">
+            <div class="experience-content">
+                <div class="experience-text">
+                    <h2 style="color: #FFD700;">Experience the Magic</h2>
+                    <p class="experience-subtitle" style="color: #FFD700;">Watch our divers explore the underwater world of the Red Sea</p>
+                    <p>From vibrant coral reefs teeming with tropical fish to historic shipwrecks that tell stories of the past, every dive is an adventure waiting to unfold. Whether you're a complete beginner or an experienced diver, we have the perfect experience for you.</p>
+                    <p>Join thousands of satisfied divers who have discovered the magic of the Red Sea with Pro Master Hurghada.</p>
+                </div>
+                
+                <div class="experience-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="section video-section">
+        <div class="container">
+            <h2 class="section-title">Experience the Magic</h2>
+            <p class="section-subtitle">Watch our divers explore the underwater world of the Red Sea</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Red Sea Diving Experience" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="300">0</div>
+                    <div class="stat-label">Happy Divers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="14">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Dive Sites</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses Section -->
+    <!-- CMS Integration: Course content can be managed through admin panel -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Popular Courses</h2>
+            <p class="section-subtitle">Start your diving journey with our most popular PADI certified courses</p>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€350</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Open Water Diver</h3>
+                        <p>Your first step into the underwater world. Learn basic diving skills and get certified to dive up to 18 meters.</p>
+                        <button class="course-button" onclick="addToCart('Open Water Diver', 350)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€420</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Advanced Open Water</h3>
+                        <p>Advance your skills and explore deeper waters. Includes specialty dives like deep diving and navigation.</p>
+                        <button class="course-button" onclick="addToCart('Advanced Open Water', 420)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€380</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Rescue Diver</h3>
+                        <p>Learn to prevent and manage problems underwater. Become a more confident and capable diver.</p>
+                        <button class="course-button" onclick="addToCart('Rescue Diver', 380)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€280</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Nitrox Specialty</h3>
+                        <p>Learn to dive with enriched air nitrox for longer bottom times and shorter surface intervals.</p>
+                        <button class="course-button" onclick="addToCart('Nitrox Specialty', 280)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€320</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Deep Diving Specialty</h3>
+                        <p>Explore the deeper realm of the ocean and learn the skills needed for safe deep water diving.</p>
+                        <button class="course-button" onclick="addToCart('Deep Diving Specialty', 320)">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-price">€300</div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Wreck Diving Specialty</h3>
+                        <p>Discover the fascinating world of wreck diving and learn safe penetration techniques.</p>
+                        <button class="course-button" onclick="addToCart('Wreck Diving Specialty', 300)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="courses.html" class="cta-button">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2 class="section-title">Are You Ready?</h2>
+            <p class="section-subtitle">Discover what makes Pro Master Hurghada the premier choice for diving enthusiasts</p>
+            
+            <div class="cta-grid">
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Passion for Diving</h3>
+                    <p>Our love for the underwater world drives us to provide exceptional experiences that create lifelong memories and inspire ocean conservation.</p>
+                </div>
+                
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Professional Team</h3>
+                    <p>Our certified instructors and dive masters are dedicated professionals who prioritize your safety while ensuring you have an amazing diving experience.</p>
+                </div>
+                
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Excellence in Service</h3>
+                    <p>We maintain the highest standards in equipment, training, and customer service to ensure every dive with us exceeds your expectations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <!-- CMS Integration: Testimonials can be managed through admin panel -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Divers Say</h2>
+            <p class="section-subtitle">Read testimonials from our satisfied customers who have experienced the magic of Red Sea diving</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">"Amazing experience! The instructors were professional and made me feel safe throughout my first diving course. The Red Sea is absolutely stunning!"</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Sarah Johnson - Open Water Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Pro Master Hurghada exceeded all my expectations. The dive sites were incredible, and the team's knowledge of the area made every dive unforgettable."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Michael Schmidt - Advanced Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The best diving center in Hurghada! Professional equipment, experienced guides, and the most beautiful dive sites in the Red Sea. Highly recommended!"</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Elena Rossi - Rescue Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Outstanding service from start to finish. The Open Water course was well-structured and the instructors were patient and knowledgeable. Can't wait to come back!"</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">James Wilson - Open Water Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The Thistlegorm wreck dive was absolutely mind-blowing! The guides knew every detail about the wreck's history. Professional service and unforgettable experience."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Anna Kowalski - Advanced Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Perfect for beginners! The pool sessions were thorough and the open water dives were conducted with utmost safety. Highly professional team."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Carlos Rodriguez - Open Water Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The Brothers Islands liveaboard was the trip of a lifetime! Saw hammerhead sharks, oceanic whitetips, and pristine coral reefs. Exceptional organization."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Marie Dubois - Advanced Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Completed my Rescue Diver course here and it was challenging but rewarding. The instructors pushed me to be better while ensuring safety at all times."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Ahmed Hassan - Rescue Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The night diving specialty was magical! Seeing the reef come alive after dark was incredible. Professional guides made it safe and educational."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Lisa Chen - Night Diving Specialist</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Fantastic equipment and boats! Everything was well-maintained and the dive sites were chosen perfectly based on conditions. True professionals."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">David Thompson - Certified Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The underwater photography course opened up a whole new world for me. Now I can capture the beauty I see underwater. Excellent instruction!"</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Yuki Tanaka - Photography Specialist</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Completed my Divemaster training here and couldn't be happier. The mentorship and guidance prepared me well for my diving career."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Roberto Silva - Divemaster</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The deep diving specialty was thrilling! Learned proper techniques for deeper exploration while maintaining safety. Highly recommend this center."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Petra Mueller - Deep Diving Specialist</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Family-friendly diving center! My teenage kids completed their Open Water here and the instructors were patient and encouraging throughout."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Mark Johnson - Family Diver</div>
+                </div>
+                
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"The wreck diving specialty was incredible! Exploring the Abu Nuhas wrecks with such knowledgeable guides made it educational and exciting."</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">Sophie Laurent - Wreck Specialist</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <span class="testimonial-dot active" onclick="showTestimonial(0)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(1)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(2)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(3)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(4)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(5)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(6)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(7)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(8)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(9)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(10)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(11)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(12)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(13)"></span>
+                <span class="testimonial-dot" onclick="showTestimonial(14)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section" style="background: linear-gradient(135deg, var(--coral), #ff5252); color: white; text-align: center;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Ready to Learn Diving?</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Join thousands of satisfied divers who started their underwater journey with Pro Master Hurghada</p>
+            <a href="courses.html" class="cta-button" style="background: white; color: var(--coral);">Browse Our Courses</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Master Hurghada</h3>
+                    <p>Professional diving center offering world-class courses and unforgettable underwater experiences in the Red Sea.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="daily-trips.html">Daily Trips</a></p>
+                    <p><a href="courses.html">Diving Courses</a></p>
+                    <p><a href="price-list.html">Price List</a></p>
+                    <p><a href="blog.html">Blog</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hurghada Marina, Red Sea, Egypt</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@promasterhurghada.com</p>
+                    <p><i class="fas fa-clock"></i> Daily: 8:00 AM - 6:00 PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Certifications</h3>
+                    <p>PADI 5 Star Dive Center</p>
+                    <p>PADI EFR Training Center</p>
+                    <p>Red Sea Diving Association</p>
+                    <p>Egyptian Travel Agents Association</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pro Master Hurghada. All rights reserved. | Designed for professional diving experiences in the Red Sea.</p>
+                <div class="developer-credit">
+                    <p>Designed and developed by Ahmed Adel</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentSlide = 0;
+        let currentTestimonial = 0;
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let currentLanguage = 'en';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            startHeroSlider();
+            startTestimonialSlider();
+            initScrollEffects();
+            animateCounters();
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language selector
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langMap = {
+                'en': '🇺🇸 EN',
+                'de': '🇩🇪 DE', 
+                'pl': '🇵🇱 PL',
+                'fr': '🇫🇷 FR',
+                'ru': '🇷🇺 RU',
+                'it': '🇮🇹 IT',
+                'zh': '🇨🇳 ZH'
+            };
+            
+            document.querySelector('.language-btn').innerHTML = `<i class="fas fa-globe"></i> ${langMap[lang]}`;
+            document.getElementById('language-dropdown').classList.remove('active');
+            
+            // Here you would implement actual language switching logic
+            console.log('Language changed to:', lang);
+        }
+
+        // Hero slider
+        function startHeroSlider() {
+            const slides = document.querySelectorAll('.hero-slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Testimonials slider
+        function startTestimonialSlider() {
+            setInterval(() => {
+                showTestimonial((currentTestimonial + 1) % 15);
+            }, 6000);
+        }
+
+        function showTestimonial(index) {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            
+            slides[currentTestimonial].classList.remove('active');
+            dots[currentTestimonial].classList.remove('active');
+            
+            currentTestimonial = index;
+            
+            slides[currentTestimonial].classList.add('active');
+            dots[currentTestimonial].classList.add('active');
+        }
+
+        // Scroll effects
+        function initScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 100;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                counter.textContent = Math.ceil(current) + '+';
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target + '+';
+                            }
+                        };
+                        
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Shopping cart functions
+        function addToCart(itemName, price) {
+            const existingItem = cartItems.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: itemName,
+                    price: price,
+                    quantity: 1,
+                    type: 'course'
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+            
+            // Show success message
+            showNotification(`${itemName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--coral);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                z-index: 10000;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('language-dropdown').classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

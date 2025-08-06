@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abu Nuhas Wrecks Adventure - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--gray);
+        }
+
+        .highlights {
+            background: var(--light-blue);
+            padding: 40px;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .highlights h3 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .highlight-item i {
+            color: var(--coral);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 20px;
+        }
+
+        .wrecks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .wreck-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .wreck-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .booking-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .booking-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .book-btn {
+            background: var(--coral);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .wrecks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="daily-trips.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Trips
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Abu Nuhas Wrecks Adventure</h1>
+            <p>Explore the famous "Ships' Graveyard" with four historic wrecks in one location</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="main-content">
+                    <h2>The Ships' Graveyard</h2>
+                    <p>Abu Nuhas reef, known as the "Ships' Graveyard," is home to four famous shipwrecks that have become some of the most popular diving sites in the Red Sea. This small reef has claimed these vessels over the decades, creating an underwater museum of maritime history.</p>
+                    
+                    <p>The wrecks range from relatively shallow depths perfect for intermediate divers to deeper sections that challenge advanced divers. Each wreck tells its own story and has developed its unique ecosystem over the years, with marine life making these artificial reefs their home.</p>
+                    
+                    <p>The combination of historical significance, marine life, and excellent diving conditions makes Abu Nuhas a must-visit destination for any serious diver visiting the Red Sea.</p>
+                    
+                    <h2>The Four Wrecks</h2>
+                    <div class="wrecks-grid">
+                        <div class="wreck-card">
+                            <h4>Giannis D</h4>
+                            <p>A cargo ship that sank in 1983. The most popular wreck with excellent penetration opportunities and abundant marine life.</p>
+                        </div>
+                        <div class="wreck-card">
+                            <h4>Chrisoula K</h4>
+                            <p>Sunk in 1981, this wreck lies in deeper water and offers spectacular swim-throughs and coral growth.</p>
+                        </div>
+                        <div class="wreck-card">
+                            <h4>Carnatic</h4>
+                            <p>The oldest wreck from 1869, broken into two sections with beautiful coral formations and fish life.</p>
+                        </div>
+                        <div class="wreck-card">
+                            <h4>Kimon M</h4>
+                            <p>The deepest wreck, suitable for advanced divers, with impressive structure and marine growth.</p>
+                        </div>
+                    </div>
+                    
+                    <h2>What Makes This Special</h2>
+                    <p>Abu Nuhas offers a unique opportunity to dive multiple wrecks in a single day, each with its own character and marine life. The wrecks have become artificial reefs, supporting diverse ecosystems with soft corals, hard corals, and countless species of fish.</p>
+                    
+                    <p>The historical aspect adds another dimension to the diving experience. These wrecks span over a century of maritime history, from the Victorian-era Carnatic to the modern cargo vessels of the 1980s.</p>
+                </div>
+                
+                <div class="highlights">
+                    <h3>Trip Highlights</h3>
+                    <div class="highlight-item">
+                        <i class="fas fa-ship"></i>
+                        <span>4 historic wrecks</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-history"></i>
+                        <span>150+ years of history</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-fish"></i>
+                        <span>Abundant marine life</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-camera"></i>
+                        <span>Photography paradise</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>Advanced Open Water required</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-depth-chart"></i>
+                        <span>15-30m depth range</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>Lunch included</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Full day adventure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-card">
+                <h2>Book Your Wreck Adventure</h2>
+                <div class="price">€55</div>
+                <p>Per person including equipment, lunch, and transfers</p>
+                <p><small>Advanced Open Water certification required</small></p>
+                <button class="book-btn" onclick="addToCart('Abu Nuhas Wrecks Adventure', 55, 'trip')">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function addToCart(itemName, price, type) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            const existingItem = cartItems.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: itemName,
+                    price: price,
+                    quantity: 1,
+                    type: type
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            
+            // Show success message
+            alert(`${itemName} added to cart!`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underwater Photography Basics - Pro Master Hurghada Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Article */
+        .article {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .article-meta {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .article-category {
+            background: var(--coral);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .article-content h2 {
+            color: var(--primary-blue);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            color: var(--secondary-blue);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background: var(--light-blue);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .tip-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            background: var(--light-blue);
+            padding: 40px 0;
+        }
+
+        .related-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .related-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .related-link {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .featured-image {
+                height: 250px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="blog.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <article class="article">
+        <div class="container">
+            <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            
+            <div class="article-header">
+                <div class="article-category">Equipment</div>
+                <h1 class="article-title">Underwater Photography Basics</h1>
+                <div class="article-meta">
+                    <i class="fas fa-calendar"></i> November 22, 2024 | 
+                    <i class="fas fa-user"></i> Photo Instructor | 
+                    <i class="fas fa-clock"></i> 12 min read
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>Underwater photography opens up a whole new dimension to diving, allowing you to capture and share the incredible beauty of the underwater world. The Red Sea, with its crystal-clear waters, vibrant coral reefs, and diverse marine life, provides the perfect backdrop for stunning underwater images. Whether you're using a simple point-and-shoot camera or professional equipment, this guide will help you take your underwater photography to the next level.</p>
+
+                <h2>Getting Started: Equipment Basics</h2>
+                <p>The key to successful underwater photography starts with choosing the right equipment for your skill level and budget. You don't need the most expensive gear to take great photos – understanding your equipment and mastering basic techniques is far more important.</p>
+
+                <h3>Camera Options</h3>
+                <p>There are several camera options for underwater photography:</p>
+
+                <h4>Compact Cameras</h4>
+                <ul>
+                    <li><strong>Pros:</strong> Easy to use, lightweight, affordable, good for beginners</li>
+                    <li><strong>Cons:</strong> Limited manual controls, smaller sensors</li>
+                    <li><strong>Best for:</strong> Recreational divers, travel photography, learning basics</li>
+                </ul>
+
+                <h4>Mirrorless Cameras</h4>
+                <ul>
+                    <li><strong>Pros:</strong> Excellent image quality, interchangeable lenses, compact size</li>
+                    <li><strong>Cons:</strong> More expensive, requires more technical knowledge</li>
+                    <li><strong>Best for:</strong> Serious enthusiasts, semi-professional work</li>
+                </ul>
+
+                <h4>DSLR Cameras</h4>
+                <ul>
+                    <li><strong>Pros:</strong> Professional image quality, extensive lens options, full manual control</li>
+                    <li><strong>Cons:</strong> Large, heavy, expensive, complex</li>
+                    <li><strong>Best for:</strong> Professional photographers, advanced enthusiasts</li>
+                </ul>
+
+                <h3>Housing Considerations</h3>
+                <p>Your camera housing is just as important as the camera itself:</p>
+                <ul>
+                    <li><strong>Depth rating:</strong> Ensure it exceeds your maximum diving depth</li>
+                    <li><strong>Controls:</strong> All essential camera functions should be accessible</li>
+                    <li><strong>Port options:</strong> Flat ports for macro, dome ports for wide-angle</li>
+                    <li><strong>Build quality:</strong> Look for robust construction and reliable seals</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4>Beginner Tip:</h4>
+                    <p>Start with a simple compact camera in a quality housing. Master the basics of composition and lighting before investing in more complex equipment. Many stunning underwater photos are taken with basic gear!</p>
+                </div>
+
+                <h2>Understanding Underwater Light</h2>
+                <p>Light behaves very differently underwater than on land, and understanding these changes is crucial for good underwater photography:</p>
+
+                <h3>Color Absorption</h3>
+                <p>Water absorbs different colors at different rates:</p>
+                <ul>
+                    <li><strong>Red:</strong> Absorbed first (within 5 meters)</li>
+                    <li><strong>Orange and Yellow:</strong> Absorbed by 10-15 meters</li>
+                    <li><strong>Green:</strong> Absorbed by 20-25 meters</li>
+                    <li><strong>Blue:</strong> Penetrates deepest, giving underwater scenes their blue tint</li>
+                </ul>
+
+                <h3>Light Intensity</h3>
+                <p>Light intensity decreases rapidly with depth:</p>
+                <ul>
+                    <li>50% of surface light is lost in the first 10 meters</li>
+                    <li>90% is lost by 20 meters</li>
+                    <li>At 30 meters, only 3% of surface light remains</li>
+                </ul>
+
+                <h2>Essential Lighting Equipment</h2>
+                <p>Artificial lighting is essential for restoring colors and creating dramatic effects:</p>
+
+                <h3>Strobes</h3>
+                <p>Underwater strobes provide powerful, brief flashes of light:</p>
+                <ul>
+                    <li><strong>Advantages:</strong> Powerful output, freeze motion, restore colors</li>
+                    <li><strong>Best for:</strong> Close-up subjects, macro photography, colorful reef scenes</li>
+                    <li><strong>Positioning:</strong> Use strobe arms to position lights away from camera</li>
+                </ul>
+
+                <h3>Video Lights</h3>
+                <p>Continuous LED lights for video and focusing:</p>
+                <ul>
+                    <li><strong>Advantages:</strong> See lighting effect before shooting, good for video</li>
+                    <li><strong>Best for:</strong> Video recording, focusing aid, close-up work</li>
+                    <li><strong>Limitations:</strong> Limited range, battery consumption</li>
+                </ul>
+
+                <h2>Composition Techniques</h2>
+                <p>Good composition is what separates snapshots from compelling photographs:</p>
+
+                <h3>Rule of Thirds</h3>
+                <p>Divide your frame into nine equal sections and place important elements along these lines or at their intersections. This creates more dynamic and visually interesting compositions.</p>
+
+                <h3>Leading Lines</h3>
+                <p>Use natural lines in the underwater environment to guide the viewer's eye:</p>
+                <ul>
+                    <li>Coral formations</li>
+                    <li>Sand ripples</li>
+                    <li>Wreck structures</li>
+                    <li>Schools of fish</li>
+                </ul>
+
+                <h3>Foreground, Middle Ground, Background</h3>
+                <p>Create depth in your images by including elements at different distances from the camera. This technique is particularly effective in wide-angle underwater photography.</p>
+
+                <h2>Shooting Techniques</h2>
+
+                <h3>Get Close</h3>
+                <p>The most important rule in underwater photography: get as close as possible to your subject. Water reduces contrast and sharpness, so minimizing the water between your camera and subject is crucial.</p>
+
+                <h3>Shoot Upward</h3>
+                <p>Shooting upward toward the surface often creates more dramatic images:</p>
+                <ul>
+                    <li>Silhouettes subjects against bright background</li>
+                    <li>Eliminates distracting backgrounds</li>
+                    <li>Creates sense of the underwater environment</li>
+                    <li>Shows the relationship between subject and surface</li>
+                </ul>
+
+                <h3>Focus on the Eyes</h3>
+                <p>When photographing marine life, always focus on the eyes. Sharp, well-lit eyes create an immediate connection between the viewer and the subject.</p>
+
+                <h2>Macro Photography</h2>
+                <p>Macro photography reveals the intricate details of small marine creatures:</p>
+
+                <h3>Subjects to Look For</h3>
+                <ul>
+                    <li><strong>Nudibranchs:</strong> Colorful sea slugs with incredible detail</li>
+                    <li><strong>Coral polyps:</strong> Individual coral animals extended for feeding</li>
+                    <li><strong>Small fish:</strong> Gobies, blennies, and juvenile species</li>
+                    <li><strong>Crustaceans:</strong> Shrimp, crabs, and other small invertebrates</li>
+                    <li><strong>Textures:</strong> Coral surfaces, sponges, and marine growth</li>
+                </ul>
+
+                <h3>Macro Techniques</h3>
+                <ul>
+                    <li><strong>Patience:</strong> Wait for the right moment and behavior</li>
+                    <li><strong>Steady approach:</strong> Move slowly to avoid startling subjects</li>
+                    <li><strong>Lighting angle:</strong> Side lighting often works better than direct flash</li>
+                    <li><strong>Depth of field:</strong> Use smaller apertures for more of the subject in focus</li>
+                </ul>
+
+                <h2>Wide-Angle Photography</h2>
+                <p>Wide-angle photography captures the grandeur of the underwater landscape:</p>
+
+                <h3>Ideal Subjects</h3>
+                <ul>
+                    <li><strong>Coral reefs:</strong> Showcase the scale and beauty of reef systems</li>
+                    <li><strong>Wrecks:</strong> Capture the drama and history of sunken vessels</li>
+                    <li><strong>Divers:</strong> Show the human element in the underwater world</li>
+                    <li><strong>Large marine life:</strong> Sharks, rays, and other big species</li>
+                </ul>
+
+                <h3>Wide-Angle Techniques</h3>
+                <ul>
+                    <li><strong>Get close to foreground:</strong> Create dramatic perspective</li>
+                    <li><strong>Use natural light:</strong> Combine ambient light with strobe fill</li>
+                    <li><strong>Include the surface:</strong> Show the connection between underwater and above</li>
+                    <li><strong>Shoot upward:</strong> Use the surface as a natural backdrop</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4>Red Sea Photography:</h4>
+                    <p>The Red Sea's excellent visibility and vibrant marine life make it perfect for both macro and wide-angle photography. The clear water allows for dramatic silhouettes, while the colorful reefs provide stunning close-up opportunities.</p>
+                </div>
+
+                <h2>Camera Settings</h2>
+                <p>Understanding basic camera settings will dramatically improve your results:</p>
+
+                <h3>Aperture (f-stop)</h3>
+                <ul>
+                    <li><strong>Wide apertures (f/2.8-f/5.6):</strong> Shallow depth of field, good for isolating subjects</li>
+                    <li><strong>Narrow apertures (f/8-f/16):</strong> Greater depth of field, good for landscapes and groups</li>
+                </ul>
+
+                <h3>Shutter Speed</h3>
+                <ul>
+                    <li><strong>Fast speeds (1/125s or faster):</strong> Freeze motion, sharp images</li>
+                    <li><strong>Slower speeds:</strong> Can create motion blur effects, but risk camera shake</li>
+                </ul>
+
+                <h3>ISO</h3>
+                <ul>
+                    <li><strong>Low ISO (100-400):</strong> Best image quality, use when possible</li>
+                    <li><strong>Higher ISO:</strong> Use when necessary for proper exposure, but expect more noise</li>
+                </ul>
+
+                <h2>Post-Processing Tips</h2>
+                <p>Post-processing can enhance your underwater images:</p>
+
+                <h3>Color Correction</h3>
+                <ul>
+                    <li>Restore reds and oranges lost to water absorption</li>
+                    <li>Adjust white balance for more natural colors</li>
+                    <li>Enhance contrast to overcome water's flattening effect</li>
+                </ul>
+
+                <h3>Basic Adjustments</h3>
+                <ul>
+                    <li><strong>Exposure:</strong> Fine-tune brightness</li>
+                    <li><strong>Contrast:</strong> Add punch to flat underwater images</li>
+                    <li><strong>Saturation:</strong> Enhance colors, but don't overdo it</li>
+                    <li><strong>Sharpening:</strong> Compensate for water's softening effect</li>
+                </ul>
+
+                <h2>Ethical Considerations</h2>
+                <p>Responsible underwater photography protects marine life and environments:</p>
+
+                <h3>Marine Life Ethics</h3>
+                <ul>
+                    <li>Never touch, move, or harass marine life for photos</li>
+                    <li>Maintain safe distances from all creatures</li>
+                    <li>Don't use flash on sensitive species</li>
+                    <li>Respect marine life behavior and breeding areas</li>
+                </ul>
+
+                <h3>Environmental Responsibility</h3>
+                <ul>
+                    <li>Perfect your buoyancy to avoid damaging reefs</li>
+                    <li>Don't remove or rearrange natural elements</li>
+                    <li>Follow local diving and photography regulations</li>
+                    <li>Share images to promote conservation awareness</li>
+                </ul>
+
+                <h2>Common Mistakes to Avoid</h2>
+                <ul>
+                    <li><strong>Too far from subject:</strong> Get closer than you think you need to</li>
+                    <li><strong>Shooting downward:</strong> This often creates boring compositions</li>
+                    <li><strong>Ignoring backgrounds:</strong> Clean, uncluttered backgrounds improve images</li>
+                    <li><strong>Over-lighting:</strong> Too much strobe light can wash out colors</li>
+                    <li><strong>Chasing subjects:</strong> Patience often yields better results than pursuit</li>
+                    <li><strong>Forgetting to dive:</strong> Don't let photography distract from dive safety</li>
+                </ul>
+
+                <h2>Building Your Skills</h2>
+                <p>Improving your underwater photography is a gradual process:</p>
+
+                <h3>Practice Regularly</h3>
+                <ul>
+                    <li>Take your camera on every dive</li>
+                    <li>Experiment with different settings and techniques</li>
+                    <li>Review and analyze your images after each dive</li>
+                    <li>Learn from mistakes and successes</li>
+                </ul>
+
+                <h3>Study Great Photography</h3>
+                <ul>
+                    <li>Follow professional underwater photographers</li>
+                    <li>Analyze what makes certain images compelling</li>
+                    <li>Attend photography workshops and courses</li>
+                    <li>Join underwater photography communities</li>
+                </ul>
+
+                <h2>Red Sea Photography Opportunities</h2>
+                <p>The Red Sea offers incredible diversity for underwater photographers:</p>
+
+                <h3>Macro Subjects</h3>
+                <ul>
+                    <li>Colorful nudibranchs and flatworms</li>
+                    <li>Intricate coral polyps and textures</li>
+                    <li>Small reef fish and juvenile species</li>
+                    <li>Crustaceans hiding in coral crevices</li>
+                </ul>
+
+                <h3>Wide-Angle Opportunities</h3>
+                <ul>
+                    <li>Dramatic coral wall formations</li>
+                    <li>Historic wrecks like the Thistlegorm</li>
+                    <li>Shark encounters at sites like Elphinstone</li>
+                    <li>Colorful soft coral gardens</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Underwater photography is a rewarding pursuit that combines technical skill, artistic vision, and diving expertise. The Red Sea provides an ideal environment for developing these skills, with its clear waters, abundant marine life, and diverse underwater landscapes.</p>
+
+                <p>Remember that becoming proficient in underwater photography takes time and practice. Start with basic equipment and techniques, focus on composition and lighting, and gradually build your skills and equipment as you gain experience.</p>
+
+                <p>Most importantly, never let photography interfere with safe diving practices or marine life conservation. The best underwater photographers are first and foremost skilled, responsible divers who respect the underwater environment.</p>
+
+                <p>Ready to start your underwater photography journey? Join us at Pro Master Hurghada for specialized photography courses and guided photo dives in the spectacular waters of the Red Sea. Capture memories that will last a lifetime while exploring one of the world's most beautiful underwater destinations!</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="related-title">Related Articles</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Choosing Your First Diving Gear</h4>
+                        <p>Complete guide to selecting the right equipment for new divers.</p>
+                        <a href="blog-post-equipment-guide.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Coral Reefs: The Rainforests of the Sea</h4>
+                        <p>Discover the incredible biodiversity of Red Sea coral reefs.</p>
+                        <a href="blog-post-coral-reefs.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>The Ultimate Guide to Red Sea Diving</h4>
+                        <p>Discover the most spectacular dive sites in the Red Sea.</p>
+                        <a href="blog-post-red-sea-guide.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

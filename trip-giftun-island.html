@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giftun Island Paradise - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--gray);
+        }
+
+        .highlights {
+            background: var(--light-blue);
+            padding: 40px;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .highlights h3 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .highlight-item i {
+            color: var(--coral);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            width: 20px;
+        }
+
+        .booking-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .booking-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .book-btn {
+            background: var(--coral);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="daily-trips.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Trips
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Giftun Island Paradise</h1>
+            <p>Discover the pristine beauty of Giftun Island's coral gardens and crystal-clear waters</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="main-content">
+                    <h2>About This Dive Site</h2>
+                    <p>Giftun Island is one of the most popular diving destinations in the Red Sea, and for good reason. This protected marine park offers some of the most pristine coral reefs in the region, with crystal-clear waters that provide excellent visibility year-round.</p>
+                    
+                    <p>The island features multiple dive sites suitable for all levels, from shallow coral gardens perfect for beginners to deeper walls that challenge more experienced divers. The biodiversity here is exceptional, with over 200 species of coral and countless varieties of tropical fish.</p>
+                    
+                    <p>What makes Giftun Island special is its protected status, which has allowed the marine ecosystem to flourish. You'll encounter healthy coral formations, schools of colorful reef fish, and if you're lucky, larger marine life including rays, turtles, and reef sharks.</p>
+                    
+                    <p>The dive sites around Giftun Island offer something for everyone. The shallow lagoons are perfect for snorkeling and beginner divers, while the outer reefs provide thrilling drift dives with excellent coral formations and marine life encounters.</p>
+                    
+                    <h2>What to Expect</h2>
+                    <p>Your day at Giftun Island begins with a comfortable boat ride from Hurghada Marina. The journey takes approximately 45 minutes, during which you can enjoy the beautiful Red Sea scenery and prepare for your dives.</p>
+                    
+                    <p>We typically conduct two dives at different sites around the island, allowing you to experience the variety of underwater landscapes. Between dives, you'll have time to relax on the boat, enjoy a delicious lunch, and share your underwater experiences with fellow divers.</p>
+                </div>
+                
+                <div class="highlights">
+                    <h3>Trip Highlights</h3>
+                    <div class="highlight-item">
+                        <i class="fas fa-fish"></i>
+                        <span>200+ coral species</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Excellent visibility (20-30m)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Perfect water temperature</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Protected marine park</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-users"></i>
+                        <span>Suitable for all levels</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>Lunch included</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-camera"></i>
+                        <span>Perfect for photography</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Full day experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-card">
+                <h2>Book Your Adventure</h2>
+                <div class="price">€35</div>
+                <p>Per person including equipment, lunch, and transfers</p>
+                <button class="book-btn" onclick="addToCart('Giftun Island Paradise', 35, 'trip')">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function addToCart(itemName, price, type) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            const existingItem = cartItems.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: itemName,
+                    price: price,
+                    quantity: 1,
+                    type: type
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            
+            // Show success message
+            alert(`${itemName} added to cart!`);
+        }
+    </script>
+</body>
+</html>

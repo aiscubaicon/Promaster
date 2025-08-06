@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brothers Islands: Egypt's Hidden Gem - Pro Master Hurghada Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Article */
+        .article {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .article-meta {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .article-category {
+            background: var(--coral);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .article-content h2 {
+            color: var(--primary-blue);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            color: var(--secondary-blue);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background: var(--light-blue);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .tip-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            background: var(--light-blue);
+            padding: 40px 0;
+        }
+
+        .related-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .related-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .related-link {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .featured-image {
+                height: 250px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="blog.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <article class="article">
+        <div class="container">
+            <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            
+            <div class="article-header">
+                <div class="article-category">Destinations</div>
+                <h1 class="article-title">Brothers Islands: Egypt's Hidden Gem</h1>
+                <div class="article-meta">
+                    <i class="fas fa-calendar"></i> December 8, 2024 | 
+                    <i class="fas fa-user"></i> Captain Mohamed | 
+                    <i class="fas fa-clock"></i> 6 min read
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>Deep in the Red Sea, approximately 67 kilometers northeast of El Quseir, lie two small rocky outcrops that represent some of the most pristine and spectacular diving in Egypt. The Brothers Islands, known locally as El Akhawein, are a pair of remote oceanic islands that offer world-class diving experiences for advanced divers seeking untouched reefs and encounters with large pelagic species.</p>
+
+                <h2>The Remote Paradise</h2>
+                <p>The Brothers Islands consist of Big Brother (El Akh el Kebir) and Little Brother (El Akh el Saghir), two small islands rising from the depths of the Red Sea. Big Brother, the larger of the two, measures approximately 400 meters long and features a lighthouse built in 1883, while Little Brother is much smaller and can be circumnavigated in a single dive.</p>
+
+                <p>What makes these islands truly special is their isolation. Located far from the mainland and surrounded by deep blue water, the Brothers have remained largely untouched by human impact, allowing their marine ecosystems to flourish in their natural state.</p>
+
+                <h2>Underwater Topography</h2>
+                <p>The underwater landscape around the Brothers Islands is nothing short of spectacular. The islands rise from depths exceeding 800 meters, creating dramatic walls that plunge into the abyss. These walls are covered in pristine hard and soft corals, creating a kaleidoscope of colors that must be seen to be believed.</p>
+
+                <p>The northern and southern plateaus of Big Brother offer different diving experiences. The northern plateau features beautiful coral gardens in shallower water, perfect for safety stops and macro photography. The southern plateau is where the famous wrecks lie, adding historical intrigue to the natural beauty.</p>
+
+                <h3>The Wrecks of Big Brother</h3>
+                <p>Big Brother is home to two fascinating wrecks that have become artificial reefs over the decades:</p>
+
+                <ul>
+                    <li><strong>Numidia:</strong> A British cargo steamer that sank in 1901, now lying on the northern tip of the island. The wreck is heavily encrusted with soft corals and provides shelter for numerous fish species.</li>
+                    <li><strong>Aida:</strong> A supply vessel that met its fate in 1957, resting on the southern plateau. This wreck is more intact and offers excellent penetration opportunities for experienced wreck divers.</li>
+                </ul>
+
+                <h2>Marine Life Encounters</h2>
+                <p>The Brothers Islands are renowned for their incredible marine biodiversity and the opportunity to encounter large pelagic species. The islands' location in open ocean attracts species that are rarely seen at coastal dive sites.</p>
+
+                <h3>Shark Encounters</h3>
+                <p>The Brothers are famous for shark encounters, particularly:</p>
+                <ul>
+                    <li><strong>Grey Reef Sharks:</strong> Commonly seen patrolling the reef edges</li>
+                    <li><strong>Oceanic Whitetip Sharks:</strong> These magnificent open-ocean predators are frequently encountered</li>
+                    <li><strong>Hammerhead Sharks:</strong> Occasionally spotted, especially during summer months</li>
+                    <li><strong>Silky Sharks:</strong> Sometimes seen in deeper waters</li>
+                </ul>
+
+                <h3>Other Marine Life</h3>
+                <p>Beyond sharks, the Brothers host an incredible array of marine life:</p>
+                <ul>
+                    <li>Schools of barracuda and tuna</li>
+                    <li>Giant moray eels</li>
+                    <li>Napoleon wrasse</li>
+                    <li>Manta rays (seasonal)</li>
+                    <li>Dolphins</li>
+                    <li>Countless species of reef fish</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4>Best Time to Visit:</h4>
+                    <p>The Brothers Islands can be dived year-round, but the best conditions are typically from March to November. Summer months (June-August) offer the warmest water temperatures and the highest chance of encountering hammerhead sharks.</p>
+                </div>
+
+                <h2>Diving Conditions</h2>
+                <p>Diving at the Brothers Islands is not for beginners. The remote location, strong currents, and deep walls require advanced diving skills and experience. Most dive operators require Advanced Open Water certification as a minimum, with many preferring divers to have deep diving and drift diving experience.</p>
+
+                <h3>What to Expect:</h3>
+                <ul>
+                    <li><strong>Visibility:</strong> Typically excellent, often exceeding 30 meters</li>
+                    <li><strong>Water Temperature:</strong> 22-28°C depending on season</li>
+                    <li><strong>Currents:</strong> Can be strong and unpredictable</li>
+                    <li><strong>Depth:</strong> Walls drop to 800+ meters</li>
+                    <li><strong>Dive Type:</strong> Drift diving, wall diving, wreck diving</li>
+                </ul>
+
+                <h2>Liveaboard Experience</h2>
+                <p>Due to their remote location, the Brothers Islands are typically accessed via liveaboard dive boats. These multi-day trips usually range from 3-7 days and often combine the Brothers with other southern Red Sea sites like Daedalus Reef or Elphinstone.</p>
+
+                <p>Liveaboard trips to the Brothers offer several advantages:</p>
+                <ul>
+                    <li>Multiple dives at each site</li>
+                    <li>Night diving opportunities</li>
+                    <li>Professional dive guides familiar with the sites</li>
+                    <li>All meals and accommodation included</li>
+                    <li>Equipment rental available</li>
+                </ul>
+
+                <h2>Conservation Efforts</h2>
+                <p>The Brothers Islands are part of Egypt's protected marine areas, and strict regulations are in place to preserve their pristine condition. Dive operators must follow specific guidelines, including:</p>
+
+                <ul>
+                    <li>Limited number of divers per site</li>
+                    <li>No anchoring on the reefs</li>
+                    <li>Strict no-touch policies</li>
+                    <li>Waste management protocols</li>
+                </ul>
+
+                <p>As divers, we have a responsibility to help protect these incredible sites by following all conservation guidelines and practicing responsible diving techniques.</p>
+
+                <h2>Photography Opportunities</h2>
+                <p>The Brothers Islands offer some of the best underwater photography opportunities in the Red Sea. The combination of pristine corals, abundant marine life, and excellent visibility creates perfect conditions for both wide-angle and macro photography.</p>
+
+                <p>Popular photography subjects include:</p>
+                <ul>
+                    <li>Shark portraits and behavior shots</li>
+                    <li>Wide-angle reef scenes</li>
+                    <li>Wreck photography</li>
+                    <li>Macro shots of coral polyps and small creatures</li>
+                    <li>Silhouette shots against the deep blue</li>
+                </ul>
+
+                <h2>Planning Your Trip</h2>
+                <p>If you're planning a trip to the Brothers Islands, here are some important considerations:</p>
+
+                <ul>
+                    <li><strong>Certification:</strong> Advanced Open Water minimum, Deep and Drift specialties recommended</li>
+                    <li><strong>Experience:</strong> At least 50 logged dives recommended</li>
+                    <li><strong>Equipment:</strong> Full wetsuit (5mm minimum), dive computer essential</li>
+                    <li><strong>Season:</strong> March-November for best conditions</li>
+                    <li><strong>Duration:</strong> Minimum 3-day liveaboard recommended</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>The Brothers Islands represent the pinnacle of Red Sea diving, offering experiences that will stay with you for a lifetime. From the dramatic walls covered in pristine corals to the thrilling encounters with pelagic species, every dive at the Brothers is an adventure.</p>
+
+                <p>While these sites are challenging and require advanced diving skills, the rewards are immeasurable. The Brothers Islands offer a glimpse into what the Red Sea was like before human impact, a pristine underwater wilderness that continues to inspire and amaze all who visit.</p>
+
+                <p>For experienced divers seeking the ultimate Red Sea adventure, the Brothers Islands should be at the top of your diving bucket list. Join us for a liveaboard expedition to these remote gems and discover why they're considered among the world's best diving destinations.</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="related-title">Related Articles</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>The Ultimate Guide to Red Sea Diving</h4>
+                        <p>Discover the most spectacular dive sites in the Red Sea.</p>
+                        <a href="blog-post-red-sea-guide.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Sharks of the Red Sea</h4>
+                        <p>Meet the magnificent sharks that call the Red Sea home.</p>
+                        <a href="blog-post-sharks.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>10 Essential Safety Tips for New Divers</h4>
+                        <p>Learn the fundamental safety practices every new diver should know.</p>
+                        <a href="blog-post-safety-tips.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

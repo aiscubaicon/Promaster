@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharks of the Red Sea: A Complete Guide - Pro Master Hurghada Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Article */
+        .article {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .article-meta {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .article-category {
+            background: var(--coral);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .article-content h2 {
+            color: var(--primary-blue);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            color: var(--secondary-blue);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background: var(--light-blue);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .tip-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            background: var(--light-blue);
+            padding: 40px 0;
+        }
+
+        .related-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .related-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .related-link {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .featured-image {
+                height: 250px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="blog.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <article class="article">
+        <div class="container">
+            <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            
+            <div class="article-header">
+                <div class="article-category">Marine Life</div>
+                <h1 class="article-title">Sharks of the Red Sea: A Complete Guide</h1>
+                <div class="article-meta">
+                    <i class="fas fa-calendar"></i> December 10, 2024 | 
+                    <i class="fas fa-user"></i> Dr. Marine Biologist | 
+                    <i class="fas fa-clock"></i> 7 min read
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>The Red Sea is home to some of the most magnificent and diverse shark species in the world. These apex predators play a crucial role in maintaining the health of marine ecosystems, and encountering them underwater is one of the most thrilling experiences a diver can have. Let's explore the fascinating world of Red Sea sharks and learn about the species you might encounter during your diving adventures.</p>
+
+                <h2>Why Sharks Are Important</h2>
+                <p>Before diving into the specific species, it's important to understand why sharks are vital to marine ecosystems. As apex predators, sharks help maintain the balance of marine food chains by controlling populations of prey species. This regulation prevents overgrazing of coral reefs and maintains biodiversity.</p>
+
+                <p>Sharks have been swimming in our oceans for over 400 million years, making them older than trees and dinosaurs. Their presence in the Red Sea indicates a healthy marine environment, and their conservation is crucial for the ecosystem's future.</p>
+
+                <h2>Common Shark Species in the Red Sea</h2>
+
+                <h3>Grey Reef Shark (Carcharhinus amblyrhynchos)</h3>
+                <p>The grey reef shark is one of the most commonly encountered sharks in the Red Sea. These medium-sized sharks typically measure 1.5-2 meters in length and are easily recognizable by their grey coloration and distinctive black-tipped fins.</p>
+
+                <p>Grey reef sharks are often found around coral reefs and drop-offs, particularly at sites like Elphinstone Reef and the Brothers Islands. They're generally curious but cautious around divers, making them excellent subjects for underwater photography.</p>
+
+                <h3>Whitetip Reef Shark (Triaenodon obesus)</h3>
+                <p>Whitetip reef sharks are smaller, more docile sharks that are frequently seen resting in caves and under coral overhangs during the day. They're easily identified by their distinctive white-tipped dorsal and tail fins.</p>
+
+                <p>These sharks are nocturnal hunters, becoming more active at night when they hunt for small fish and crustaceans in the reef crevices. During day dives, you'll often find them resting motionless on the sandy bottom or in caves.</p>
+
+                <h3>Oceanic Whitetip Shark (Carcharhinus longimanus)</h3>
+                <p>The oceanic whitetip is perhaps the most famous shark of the Red Sea, particularly around Elphinstone Reef and the Brothers Islands. These large, powerful sharks can reach lengths of up to 3 meters and are characterized by their rounded fins with distinctive white tips.</p>
+
+                <p>Oceanic whitetips are open-ocean predators that venture close to reefs in the Red Sea. They're known for their bold and curious nature, often approaching divers closely. While this can be intimidating, they're generally not aggressive toward humans.</p>
+
+                <div class="tip-box">
+                    <h4>Safety Tip:</h4>
+                    <p>When encountering oceanic whitetips, remain calm and avoid sudden movements. These sharks are curious but generally harmless to divers. Maintain eye contact and slowly back away if they approach too closely.</p>
+                </div>
+
+                <h3>Hammerhead Sharks</h3>
+                <p>Several species of hammerhead sharks can be found in the Red Sea, including the great hammerhead and scalloped hammerhead. These distinctive sharks are most commonly encountered at remote sites like Daedalus Reef and the Brothers Islands.</p>
+
+                <p>Hammerheads are typically seen in deeper waters and are more common during certain seasons. They're often encountered in schools, creating one of the most spectacular sights in the underwater world.</p>
+
+                <h3>Silky Shark (Carcharhinus falciformis)</h3>
+                <p>Silky sharks are sleek, fast-swimming sharks that are occasionally encountered in the Red Sea's deeper waters. They're characterized by their smooth skin texture and streamlined body shape.</p>
+
+                <p>These sharks are more commonly seen during night dives or in areas with strong currents where they hunt for schooling fish.</p>
+
+                <h2>Best Places to See Sharks in the Red Sea</h2>
+
+                <h3>Elphinstone Reef</h3>
+                <p>Elphinstone Reef is famous worldwide for its shark encounters, particularly oceanic whitetips. The reef's location in open water attracts pelagic species, making it one of the best places in the Red Sea to see large sharks.</p>
+
+                <h3>Brothers Islands</h3>
+                <p>The remote Brothers Islands offer some of the most pristine shark diving in the Red Sea. Grey reef sharks, oceanic whitetips, and occasionally hammerheads can be encountered here.</p>
+
+                <h3>Daedalus Reef</h3>
+                <p>Daedalus Reef is renowned for hammerhead shark encounters, particularly during the summer months. The reef's isolated location in the middle of the Red Sea makes it a magnet for pelagic species.</p>
+
+                <h2>Shark Behavior and Safety</h2>
+                <p>Understanding shark behavior is crucial for safe and enjoyable encounters. Most sharks are naturally cautious around humans and will typically maintain their distance. However, there are some important guidelines to follow:</p>
+
+                <ul>
+                    <li>Remain calm and avoid sudden movements</li>
+                    <li>Maintain eye contact with the shark</li>
+                    <li>Never attempt to touch or chase sharks</li>
+                    <li>Give sharks plenty of space to move freely</li>
+                    <li>Follow your dive guide's instructions</li>
+                </ul>
+
+                <h2>Conservation Challenges</h2>
+                <p>Red Sea sharks face numerous threats, including overfishing, habitat destruction, and climate change. Many shark species have experienced significant population declines due to commercial fishing and the demand for shark fins.</p>
+
+                <p>As divers, we can contribute to shark conservation by:</p>
+                <ul>
+                    <li>Supporting responsible dive operators</li>
+                    <li>Never purchasing shark products</li>
+                    <li>Participating in citizen science projects</li>
+                    <li>Spreading awareness about shark conservation</li>
+                    <li>Following responsible diving practices</li>
+                </ul>
+
+                <h2>Photography Tips</h2>
+                <p>Photographing sharks requires patience, respect, and proper technique. Here are some tips for capturing great shark photos:</p>
+
+                <ul>
+                    <li>Use natural light when possible</li>
+                    <li>Shoot from below to silhouette sharks against the surface</li>
+                    <li>Focus on the eyes for compelling portraits</li>
+                    <li>Capture behavior and interaction with the environment</li>
+                    <li>Be patient and let sharks come to you</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Sharks are among the Red Sea's most magnificent inhabitants, and encountering them is a privilege that comes with responsibility. By understanding these incredible creatures and respecting their role in the marine ecosystem, we can ensure that future generations of divers will also have the opportunity to witness their majesty.</p>
+
+                <p>Remember, sharks are not the monsters portrayed in movies – they're sophisticated predators that deserve our respect and protection. Every shark encounter is a reminder of the incredible biodiversity of the Red Sea and our responsibility to protect it.</p>
+
+                <p>Ready to meet the sharks of the Red Sea? Join us for an unforgettable diving adventure where you might encounter these magnificent creatures in their natural habitat!</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="related-title">Related Articles</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>The Ultimate Guide to Red Sea Diving</h4>
+                        <p>Discover the most spectacular dive sites in the Red Sea.</p>
+                        <a href="blog-post-red-sea-guide.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>10 Essential Safety Tips for New Divers</h4>
+                        <p>Learn the fundamental safety practices every new diver should know.</p>
+                        <a href="blog-post-safety-tips.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Brothers Islands: Egypt's Hidden Gem</h4>
+                        <p>Explore the remote Brothers Islands and their pristine reefs.</p>
+                        <a href="blog-post-brothers-islands.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

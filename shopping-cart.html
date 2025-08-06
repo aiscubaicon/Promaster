@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+            --section-padding: 80px 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-dropdown.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown a:hover {
+            background: var(--light-blue);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            margin-top: 30px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            opacity: 0.6;
+        }
+
+        /* Cart Section */
+        .cart-section {
+            padding: var(--section-padding);
+            min-height: 60vh;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .cart-header {
+            background: var(--light-blue);
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-header h2 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .cart-header p {
+            color: var(--gray);
+        }
+
+        .cart-item {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+            display: grid;
+            grid-template-columns: auto 1fr auto auto auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .item-details h3 {
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .item-type {
+            color: var(--coral);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            padding: 5px;
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--coral);
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            color: var(--coral);
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 60px 25px;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .empty-cart p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .continue-shopping {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .continue-shopping:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .summary-title {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .discount-section {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .discount-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .discount-code {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .apply-discount {
+            background: var(--coral);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .apply-discount:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .discount-applied {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid var(--primary-blue);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .checkout-btn {
+            background: var(--coral);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Checkout Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 25px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .checkout-steps {
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-title {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover,
+        .payment-method.selected {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-secondary {
+            background: var(--gray);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .invoice-id {
+            background: var(--light-blue);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--coral);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .developer-credit {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .cart-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .cart-section {
+                padding: 50px 0;
+            }
+
+            .cart-items,
+            .cart-summary {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="daily-trips.html">Daily Trips</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="price-list.html">Price List</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 German</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polish</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 French</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Russian</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italian</a>
+                        <a href="#" onclick="changeLanguage('zh')">🇨🇳 Chinese</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" onclick="window.location.href='shopping-cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <p>Review your selected courses and trips before checkout</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Shopping Cart</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container" id="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h2>Your Items</h2>
+                        <p id="cart-item-count">0 items in your cart</p>
+                    </div>
+                    <div id="cart-items-list">
+                        <!-- Cart items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3 class="summary-title">Order Summary</h3>
+                    
+                    <div class="discount-section">
+                        <div class="discount-input">
+                            <input type="text" class="discount-code" id="discount-code" placeholder="Discount code">
+                            <button class="apply-discount" onclick="applyDiscount()">Apply</button>
+                        </div>
+                        <div id="discount-message"></div>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">€0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Discount:</span>
+                        <span id="discount-amount">€0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (14%):</span>
+                        <span id="tax-amount">€0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total-amount">€0</span>
+                    </div>
+                    
+                    <button class="checkout-btn" onclick="startCheckout()">
+                        <i class="fas fa-credit-card"></i> Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="modal-close" onclick="closeCheckout()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="checkout-steps">
+                    <!-- Step 1: Customer Information -->
+                    <div class="step active" id="step-1">
+                        <h3 class="step-title">Customer Information</h3>
+                        <form id="customer-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="first-name">First Name *</label>
+                                    <input type="text" id="first-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last-name">Last Name *</label>
+                                    <input type="text" id="last-name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country *</label>
+                                    <select id="country" required>
+                                        <option value="">Select Country</option>
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="IT">Italy</option>
+                                        <option value="ES">Spain</option>
+                                        <option value="PL">Poland</option>
+                                        <option value="RU">Russia</option>
+                                        <option value="CN">China</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="diving-experience">Diving Experience Level</label>
+                                <select id="diving-experience">
+                                    <option value="">Select Experience Level</option>
+                                    <option value="beginner">Complete Beginner</option>
+                                    <option value="open-water">Open Water Certified</option>
+                                    <option value="advanced">Advanced Open Water</option>
+                                    <option value="rescue">Rescue Diver</option>
+                                    <option value="divemaster">Divemaster+</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div class="step-buttons">
+                            <div></div>
+                            <button class="btn-primary" onclick="nextStep(2)">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Payment Method -->
+                    <div class="step" id="step-2">
+                        <h3 class="step-title">Payment Method</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method" onclick="selectPayment('card')">
+                                <i class="fas fa-credit-card"></i>
+                                <div>Credit Card</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('paypal')">
+                                <i class="fab fa-paypal"></i>
+                                <div>PayPal</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('bank')">
+                                <i class="fas fa-university"></i>
+                                <div>Bank Transfer</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('cash')">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div>Pay at Center</div>
+                            </div>
+                        </div>
+                        <div id="payment-details"></div>
+                        <div class="step-buttons">
+                            <button class="btn-secondary" onclick="prevStep(1)">Back</button>
+                            <button class="btn-primary" onclick="nextStep(3)">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Review & Confirm -->
+                    <div class="step" id="step-3">
+                        <h3 class="step-title">Review & Confirm</h3>
+                        <div id="order-review"></div>
+                        <div class="step-buttons">
+                            <button class="btn-secondary" onclick="prevStep(2)">Back</button>
+                            <button class="btn-primary" onclick="completeOrder()">Complete Order</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Success -->
+                    <div class="step" id="step-4">
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Order Confirmed!</h3>
+                            <p>Thank you for your booking. Your reservation has been confirmed.</p>
+                            <div class="invoice-id">
+                                Invoice ID: <span id="invoice-number"></span>
+                            </div>
+                            <p>Confirmation emails have been sent to both you and our dive center. We'll contact you within 24 hours to finalize your diving schedule.</p>
+                            <button class="btn-primary" onclick="closeCheckout(); clearCart();">Continue Shopping</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Master Hurghada</h3>
+                    <p>Professional diving center offering world-class courses and unforgettable underwater experiences in the Red Sea.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="daily-trips.html">Daily Trips</a></p>
+                    <p><a href="courses.html">Diving Courses</a></p>
+                    <p><a href="price-list.html">Price List</a></p>
+                    <p><a href="blog.html">Blog</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hurghada Marina, Red Sea, Egypt</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@promasterhurghada.com</p>
+                    <p><i class="fas fa-clock"></i> Daily: 8:00 AM - 6:00 PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Certifications</h3>
+                    <p>PADI 5 Star Dive Center</p>
+                    <p>PADI EFR Training Center</p>
+                    <p>Red Sea Diving Association</p>
+                    <p>Egyptian Travel Agents Association</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pro Master Hurghada. All rights reserved. | Designed for professional diving experiences in the Red Sea.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let currentLanguage = 'en';
+        let currentStep = 1;
+        let selectedPayment = '';
+        let discountApplied = 0;
+        let orderData = {};
+
+        // Discount codes
+        const discountCodes = {
+            'STUDENT10': 10,
+            'GROUP15': 15,
+            'EARLY20': 20,
+            'WELCOME5': 5,
+            'RETURN25': 25
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            renderCartItems();
+            updateCartSummary();
+            initScrollEffects();
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language selector
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langMap = {
+                'en': '🇺🇸 EN',
+                'de': '🇩🇪 DE', 
+                'pl': '🇵🇱 PL',
+                'fr': '🇫🇷 FR',
+                'ru': '🇷🇺 RU',
+                'it': '🇮🇹 IT',
+                'zh': '🇨🇳 ZH'
+            };
+            
+            document.querySelector('.language-btn').innerHTML = `<i class="fas fa-globe"></i> ${langMap[lang]}`;
+            document.getElementById('language-dropdown').classList.remove('active');
+            
+            console.log('Language changed to:', lang);
+        }
+
+        // Cart functions
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('cart-item-count').textContent = `${totalItems} items in your cart`;
+        }
+
+        function renderCartItems() {
+            const cartItemsList = document.getElementById('cart-items-list');
+            
+            if (cartItems.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some courses or trips to get started with your diving adventure!</p>
+                        <a href="courses.html" class="continue-shopping">Browse Courses</a>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsList.innerHTML = cartItems.map(item => `
+                <div class="cart-item">
+                    <div class="item-image" style="background-image: url('${getItemImage(item.type)}');"></div>
+                    <div class="item-details">
+                        <h3>${item.name}</h3>
+                        <div class="item-type">${item.type}</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                        <input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    </div>
+                    <div class="item-price">€${(item.price * item.quantity).toFixed(2)}</div>
+                    <button class="remove-btn" onclick="removeItem(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function getItemImage(type) {
+            const images = {
+                'course': 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                'trip': 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                'equipment': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80'
+            };
+            return images[type] || images['course'];
+        }
+
+        function updateQuantity(itemId, newQuantity) {
+            newQuantity = parseInt(newQuantity);
+            if (newQuantity < 1) {
+                removeItem(itemId);
+                return;
+            }
+
+            const itemIndex = cartItems.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+                cartItems[itemIndex].quantity = newQuantity;
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                renderCartItems();
+                updateCartSummary();
+                updateCartCount();
+            }
+        }
+
+        function removeItem(itemId) {
+            cartItems = cartItems.filter(item => item.id !== itemId);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCartItems();
+            updateCartSummary();
+            updateCartCount();
+            showNotification('Item removed from cart');
+        }
+
+        function updateCartSummary() {
+            const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const discountAmount = subtotal * (discountApplied / 100);
+            const discountedSubtotal = subtotal - discountAmount;
+            const tax = discountedSubtotal * 0.14; // 14% tax
+            const total = discountedSubtotal + tax;
+
+            document.getElementById('subtotal').textContent = `€${subtotal.toFixed(2)}`;
+            document.getElementById('discount-amount').textContent = `-€${discountAmount.toFixed(2)}`;
+            document.getElementById('tax-amount').textContent = `€${tax.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `€${total.toFixed(2)}`;
+        }
+
+        function applyDiscount() {
+            const code = document.getElementById('discount-code').value.toUpperCase();
+            const messageDiv = document.getElementById('discount-message');
+            
+            if (discountCodes[code]) {
+                discountApplied = discountCodes[code];
+                messageDiv.innerHTML = `<div class="discount-applied">Discount applied: ${discountApplied}% off!</div>`;
+                updateCartSummary();
+                showNotification(`${discountApplied}% discount applied!`);
+            } else {
+                messageDiv.innerHTML = '<div style="color: var(--coral); font-size: 0.9rem; text-align: center;">Invalid discount code</div>';
+                setTimeout(() => {
+                    messageDiv.innerHTML = '';
+                }, 3000);
+            }
+        }
+
+        // Checkout functions
+        function startCheckout() {
+            if (cartItems.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            document.getElementById('checkout-modal').classList.add('active');
+            currentStep = 1;
+            showStep(1);
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.remove('active');
+            currentStep = 1;
+            selectedPayment = '';
+        }
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            // Show current step
+            document.getElementById(`step-${step}`).classList.add('active');
+            currentStep = step;
+        }
+
+        function nextStep(step) {
+            if (step === 2) {
+                // Validate customer form
+                const form = document.getElementById('customer-form');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+            } else if (step === 3) {
+                // Validate payment selection
+                if (!selectedPayment) {
+                    showNotification('Please select a payment method');
+                    return;
+                }
+                generateOrderReview();
+            }
+            showStep(step);
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-method').forEach(pm => pm.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            const detailsDiv = document.getElementById('payment-details');
+            
+            if (method === 'card') {
+                detailsDiv.innerHTML = `
+                    <div style="margin-top: 20px;">
+                        <div class="form-group">
+                            <label>Card Number *</label>
+                            <input type="text" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry Date *</label>
+                                <input type="text" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV *</label>
+                                <input type="text" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (method === 'cash') {
+                detailsDiv.innerHTML = `
+                    <div style="margin-top: 20px; padding: 15px; background: var(--light-blue); border-radius: 8px;">
+                        <p><strong>Pay at Dive Center</strong></p>
+                        <p>You can pay in cash when you arrive at our dive center. We accept EUR, USD, and Egyptian Pounds.</p>
+                    </div>
+                `;
+            } else {
+                detailsDiv.innerHTML = `
+                    <div style="margin-top: 20px; padding: 15px; background: var(--light-blue); border-radius: 8px;">
+                        <p>You will be redirected to complete your payment securely.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function generateOrderReview() {
+            const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const discountAmount = subtotal * (discountApplied / 100);
+            const discountedSubtotal = subtotal - discountAmount;
+            const tax = discountedSubtotal * 0.14;
+            const total = discountedSubtotal + tax;
+
+            const customerData = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                experience: document.getElementById('diving-experience').value
+            };
+
+            const reviewDiv = document.getElementById('order-review');
+            reviewDiv.innerHTML = `
+                <div style="background: var(--light-blue); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4>Customer Information</h4>
+                    <p><strong>Name:</strong> ${customerData.firstName} ${customerData.lastName}</p>
+                    <p><strong>Email:</strong> ${customerData.email}</p>
+                    <p><strong>Phone:</strong> ${customerData.phone}</p>
+                    <p><strong>Country:</strong> ${customerData.country}</p>
+                    ${customerData.experience ? `<p><strong>Experience:</strong> ${customerData.experience}</p>` : ''}
+                </div>
+                
+                <div style="background: white; border: 1px solid #eee; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                    <h4>Order Items</h4>
+                    ${cartItems.map(item => `
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                            <span>${item.name} (${item.type}) x${item.quantity}</span>
+                            <span>€${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="background: white; border: 1px solid #eee; border-radius: 10px; padding: 20px;">
+                    <h4>Payment Summary</h4>
+                    <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                        <span>Subtotal:</span>
+                        <span>€${subtotal.toFixed(2)}</span>
+                    </div>
+                    ${discountApplied > 0 ? `
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0; color: var(--coral);">
+                            <span>Discount (${discountApplied}%):</span>
+                            <span>-€${discountAmount.toFixed(2)}</span>
+                        </div>
+                    ` : ''}
+                    <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                        <span>Tax (14%):</span>
+                        <span>€${tax.toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 2px solid var(--primary-blue); font-weight: bold; color: var(--primary-blue);">
+                        <span>Total:</span>
+                        <span>€${total.toFixed(2)}</span>
+                    </div>
+                    <p style="margin-top: 10px;"><strong>Payment Method:</strong> ${getPaymentMethodName(selectedPayment)}</p>
+                </div>
+            `;
+
+            // Store order data for completion
+            orderData = {
+                customer: customerData,
+                items: cartItems,
+                payment: selectedPayment,
+                subtotal: subtotal,
+                discount: discountAmount,
+                tax: tax,
+                total: total,
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function getPaymentMethodName(method) {
+            const names = {
+                'card': 'Credit Card',
+                'paypal': 'PayPal',
+                'bank': 'Bank Transfer',
+                'cash': 'Pay at Center'
+            };
+            return names[method] || method;
+        }
+
+        function completeOrder() {
+            // Generate invoice ID
+            const invoiceId = 'PMH-' + Date.now().toString().slice(-8);
+            document.getElementById('invoice-number').textContent = invoiceId;
+            
+            // Store order in localStorage (in real app, send to backend)
+            const completedOrder = {
+                ...orderData,
+                invoiceId: invoiceId,
+                status: 'confirmed'
+            };
+            
+            // Simulate sending confirmation emails
+            console.log('Order completed:', completedOrder);
+            console.log('Sending confirmation email to customer:', orderData.customer.email);
+            console.log('Sending notification email to dive center: info@promasterhurghada.com');
+            
+            // Show success step
+            showStep(4);
+            
+            // Simulate push notification
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('Booking Confirmed!', {
+                    body: `Your diving reservation (${invoiceId}) has been confirmed. Check your email for details.`,
+                    icon: '/favicon.ico'
+                });
+            }
+            
+            showNotification('Order completed successfully! Confirmation emails sent.');
+        }
+
+        function clearCart() {
+            cartItems = [];
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+            renderCartItems();
+            updateCartSummary();
+            window.location.href = 'index.html';
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--coral);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                z-index: 10000;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                animation: slideInRight 0.3s ease-out;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+
+        // Scroll effects
+        function initScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('language-dropdown').classList.remove('active');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('checkout-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'checkout-modal') {
+                closeCheckout();
+            }
+        });
+
+        // Request notification permission
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // Add CSS animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

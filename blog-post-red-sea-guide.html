@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Guide to Red Sea Diving - Pro Master Hurghada Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Article */
+        .article {
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .article-meta {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .article-category {
+            background: var(--coral);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .article-content h2 {
+            color: var(--primary-blue);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            color: var(--secondary-blue);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background: var(--light-blue);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .tip-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            background: var(--light-blue);
+            padding: 40px 0;
+        }
+
+        .related-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .related-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .related-link {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .featured-image {
+                height: 250px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            <a href="blog.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <article class="article">
+        <div class="container">
+            <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            
+            <div class="article-header">
+                <div class="article-category">Destinations</div>
+                <h1 class="article-title">The Ultimate Guide to Red Sea Diving</h1>
+                <div class="article-meta">
+                    <i class="fas fa-calendar"></i> December 15, 2024 | 
+                    <i class="fas fa-user"></i> Ahmed Hassan | 
+                    <i class="fas fa-clock"></i> 8 min read
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>The Red Sea is undoubtedly one of the world's premier diving destinations, offering an unparalleled underwater experience that attracts divers from every corner of the globe. With its crystal-clear waters, vibrant coral reefs, and incredible marine biodiversity, the Red Sea provides diving opportunities that are simply unmatched anywhere else on Earth.</p>
+
+                <h2>Why the Red Sea is Special</h2>
+                <p>What makes the Red Sea so extraordinary for diving? Several factors combine to create this underwater paradise. The sea's unique geographical location, nestled between Africa and Asia, creates a natural barrier that has allowed marine life to evolve in relative isolation, resulting in high levels of endemism.</p>
+
+                <p>The water temperature remains consistently warm throughout the year, ranging from 22°C in winter to 28°C in summer, making it comfortable for diving in any season. Visibility is exceptional, often exceeding 30 meters, allowing divers to fully appreciate the stunning underwater landscapes.</p>
+
+                <h2>Best Dive Sites in the Red Sea</h2>
+                
+                <h3>Northern Red Sea</h3>
+                <p>The northern region, accessible from Hurghada and Sharm El Sheikh, offers some of the most accessible yet spectacular diving in the Red Sea:</p>
+
+                <ul>
+                    <li><strong>Giftun Island:</strong> Perfect for beginners with shallow coral gardens and abundant marine life</li>
+                    <li><strong>Abu Nuhas (Ships' Graveyard):</strong> Four historic wrecks in one location</li>
+                    <li><strong>Thistlegorm:</strong> The world's most famous wreck dive, a WWII cargo ship</li>
+                    <li><strong>Ras Mohammed:</strong> Dramatic walls and shark encounters</li>
+                </ul>
+
+                <h3>Southern Red Sea</h3>
+                <p>The southern region offers more remote and pristine diving experiences:</p>
+
+                <ul>
+                    <li><strong>Brothers Islands:</strong> Remote oceanic islands with pristine reefs and pelagic species</li>
+                    <li><strong>Daedalus Reef:</strong> Famous for hammerhead shark encounters</li>
+                    <li><strong>St. John's Reef:</strong> Pristine coral formations and caves</li>
+                    <li><strong>Fury Shoals:</strong> Untouched reefs with incredible biodiversity</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4>Pro Tip:</h4>
+                    <p>The best time to dive the Red Sea is from March to May and September to November when water temperatures are comfortable and marine life is most active. However, diving is excellent year-round!</p>
+                </div>
+
+                <h2>Marine Life Encounters</h2>
+                <p>The Red Sea is home to over 1,200 species of fish, 200 species of coral, and numerous endemic species found nowhere else on Earth. Divers can expect to encounter:</p>
+
+                <ul>
+                    <li>Colorful reef fish including angelfish, butterflyfish, and parrotfish</li>
+                    <li>Large pelagic species such as sharks, rays, and barracuda</li>
+                    <li>Unique Red Sea endemics like the Red Sea clownfish and royal angelfish</li>
+                    <li>Dolphins, dugongs, and sea turtles</li>
+                    <li>Spectacular coral formations including table corals and soft corals</li>
+                </ul>
+
+                <h2>Planning Your Red Sea Diving Adventure</h2>
+                
+                <h3>Certification Requirements</h3>
+                <p>While some sites are suitable for beginners, many of the Red Sea's best dive sites require Advanced Open Water certification or higher. Deep wrecks and drift diving sites demand experience and proper training.</p>
+
+                <h3>What to Bring</h3>
+                <p>Essential items for Red Sea diving include:</p>
+                <ul>
+                    <li>Certification cards and logbook</li>
+                    <li>Reef-safe sunscreen</li>
+                    <li>Underwater camera for capturing memories</li>
+                    <li>Dive computer for safety</li>
+                    <li>Wetsuit (3-5mm depending on season)</li>
+                </ul>
+
+                <h2>Conservation and Responsible Diving</h2>
+                <p>The Red Sea's marine ecosystem is precious and fragile. As divers, we have a responsibility to protect this underwater paradise for future generations. Always practice responsible diving by:</p>
+
+                <ul>
+                    <li>Maintaining proper buoyancy to avoid damaging corals</li>
+                    <li>Never touching or collecting marine life</li>
+                    <li>Using reef-safe sunscreen</li>
+                    <li>Following local diving regulations</li>
+                    <li>Supporting eco-friendly dive operators</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>The Red Sea offers diving experiences that will stay with you for a lifetime. From the historic wrecks of the north to the pristine reefs of the south, every dive reveals new wonders and creates unforgettable memories. Whether you're just starting your diving journey or you're a seasoned underwater explorer, the Red Sea has something magical waiting for you beneath its crystal-clear waters.</p>
+
+                <p>Ready to explore the Red Sea's underwater treasures? Join us at Pro Master Hurghada for the diving adventure of a lifetime!</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="related-title">Related Articles</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>10 Essential Safety Tips for New Divers</h4>
+                        <p>Learn the fundamental safety practices every new diver should know.</p>
+                        <a href="blog-post-safety-tips.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Sharks of the Red Sea</h4>
+                        <p>Meet the magnificent sharks that call the Red Sea home.</p>
+                        <a href="blog-post-sharks.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <div class="related-content">
+                        <h4>Brothers Islands: Egypt's Hidden Gem</h4>
+                        <p>Explore the remote Brothers Islands and their pristine reefs.</p>
+                        <a href="blog-post-brothers-islands.html" class="related-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

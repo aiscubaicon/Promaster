@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+            --section-padding: 80px 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-dropdown.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown a:hover {
+            background: var(--light-blue);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            margin-top: 30px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            opacity: 0.6;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .story-content h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+        }
+
+        .story-content p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .story-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--light-blue);
+            padding: var(--section-padding);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Mission & Values */
+        .mission-values {
+            padding: var(--section-padding);
+        }
+
+        .mission-values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            color: var(--coral);
+            margin-bottom: 25px;
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .mission-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--light-blue);
+            padding: var(--section-padding);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-photo {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .member-info {
+            padding: 25px;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--primary-blue);
+        }
+
+        .member-role {
+            color: var(--coral);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .member-bio {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .member-certifications {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .certification-badge {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            text-align: center;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .certification-item {
+            padding: 30px 20px;
+        }
+
+        .certification-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .certification-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .certification-item p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--coral);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mission-values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                flex-direction: column;
+            }
+
+            .team-member {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .member-photo {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
+            .member-certifications {
+                justify-content: center;
+            }
+
+            .certifications-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .about-section {
+                padding: 50px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="daily-trips.html">Daily Trips</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="price-list.html">Price List</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 German</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polish</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 French</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Russian</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italian</a>
+                        <a href="#" onclick="changeLanguage('zh')">🇨🇳 Chinese</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" onclick="window.location.href='shopping-cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Pro Master Hurghada</h1>
+            <p>Discover our story, meet our team, and learn about our commitment to exceptional diving experiences</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>About</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <!-- CMS Integration: About content can be managed through admin panel -->
+    <section class="about-section">
+        <div class="container">
+            <div class="story-section">
+                <div class="story-content">
+                    <h3>Our Story</h3>
+                    <p>Founded in 2010, Pro Master Hurghada began as a dream to share the incredible underwater world of the Red Sea with diving enthusiasts from around the globe. What started as a small dive center with just two instructors has grown into one of Egypt's most respected PADI 5-Star dive centers.</p>
+                    <p>Our journey has been guided by a simple philosophy: provide safe, professional, and unforgettable diving experiences while fostering a deep respect for marine conservation. Over the years, we've certified thousands of divers and introduced countless adventurers to the magic beneath the waves.</p>
+                    <p>Today, we're proud to be recognized as a leader in diving education and underwater exploration in the Red Sea region, continuing to set the standard for excellence in diving services.</p>
+                </div>
+                <div class="story-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Achievements</h2>
+            <p class="section-subtitle">Numbers that reflect our commitment to excellence</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="5000">0</div>
+                    <div class="stat-label">Certified Divers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="14">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="30">0</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Dive Sites</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values -->
+    <section class="mission-values">
+        <div class="container">
+            <h2 class="section-title">Our Mission & Values</h2>
+            <p class="section-subtitle">The principles that guide everything we do</p>
+            
+            <div class="mission-values-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Safety is our top priority. We maintain the highest standards in equipment, training, and dive procedures to ensure every underwater adventure is both thrilling and secure.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Excellence in Education</h3>
+                    <p>We're committed to providing world-class diving education that empowers our students with knowledge, skills, and confidence to explore the underwater world responsibly.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Marine Conservation</h3>
+                    <p>We believe in protecting the marine environment for future generations. Our programs emphasize conservation awareness and sustainable diving practices.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Focus</h3>
+                    <p>We're more than a dive center – we're a community of ocean lovers. We foster lasting friendships and connections through our shared passion for diving.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Professional Service</h3>
+                    <p>Our team of certified professionals is dedicated to providing personalized service that exceeds expectations and creates unforgettable experiences.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Standards</h3>
+                    <p>We adhere to international diving standards and continuously update our practices to reflect the latest in diving safety and education.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">Professional instructors and dive masters dedicated to your underwater adventure</p>
+            
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Ahmed Hassan</h3>
+                        <div class="member-role">Center Director & Chief Instructor</div>
+                        <p class="member-bio">With over 15 years of diving experience, Ahmed founded Pro Master Hurghada with a vision to share the Red Sea's beauty.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">PADI IDC Staff</span>
+                            <span class="certification-badge">EFR Instructor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Sarah Johnson</h3>
+                        <div class="member-role">Senior Instructor</div>
+                        <p class="member-bio">Marine biologist turned diving instructor, Sarah brings scientific knowledge and passion to every course.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">PADI MSDT</span>
+                            <span class="certification-badge">Nitrox Instructor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Captain Mohamed</h3>
+                        <div class="member-role">Boat Captain & Dive Guide</div>
+                        <p class="member-bio">Local Red Sea expert with 20+ years navigating these waters and discovering hidden dive sites.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Boat Captain</span>
+                            <span class="certification-badge">Divemaster</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Elena Rossi</h3>
+                        <div class="member-role">Technical Instructor</div>
+                        <p class="member-bio">Technical diving specialist offering advanced courses and deep diving expeditions.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">TEC Deep</span>
+                            <span class="certification-badge">Trimix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Marcus Schmidt</h3>
+                        <div class="member-role">Equipment Specialist</div>
+                        <p class="member-bio">Ensures all diving equipment meets the highest safety standards and provides equipment consultations.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Equipment Specialist</span>
+                            <span class="certification-badge">Instructor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Fatima Al-Rashid</h3>
+                        <div class="member-role">Marine Conservation Officer</div>
+                        <p class="member-bio">Leads our conservation efforts and educates divers about marine ecosystem protection.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Marine Biologist</span>
+                            <span class="certification-badge">Instructor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional team members would continue here... -->
+                <!-- For brevity, showing 6 of the 30 team members -->
+                
+                <!-- Team Member 7 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">James Wilson</h3>
+                        <div class="member-role">Wreck Diving Specialist</div>
+                        <p class="member-bio">Expert in wreck diving with extensive knowledge of Red Sea shipwrecks and their histories.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Wreck Instructor</span>
+                            <span class="certification-badge">Deep Specialty</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 8 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Anna Kowalski</h3>
+                        <div class="member-role">Photography Instructor</div>
+                        <p class="member-bio">Professional underwater photographer teaching the art of capturing marine life beauty.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Photo Instructor</span>
+                            <span class="certification-badge">Digital UW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 9 -->
+                <div class="team-member">
+                    <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80');"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Omar Farouk</h3>
+                        <div class="member-role">Night Diving Guide</div>
+                        <p class="member-bio">Specialist in nocturnal marine life and night diving safety procedures.</p>
+                        <div class="member-certifications">
+                            <span class="certification-badge">Night Specialty</span>
+                            <span class="certification-badge">Divemaster</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Our Certifications</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Recognized by leading diving organizations worldwide</p>
+            
+            <div class="certifications-grid">
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>PADI 5 Star Dive Center</h3>
+                    <p>The highest rating from PADI, recognizing our commitment to quality diving education and customer service.</p>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>PADI EFR Training Center</h3>
+                    <p>Authorized to provide Emergency First Response training, ensuring our divers are prepared for any situation.</p>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Red Sea Diving Association</h3>
+                    <p>Member of the regional association promoting safe diving practices and marine conservation.</p>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Egyptian Travel Agents Association</h3>
+                    <p>Licensed tour operator providing comprehensive diving and travel services in Egypt.</p>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>ISO Safety Standards</h3>
+                    <p>Compliant with international safety standards for diving operations and equipment maintenance.</p>
+                </div>
+                
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Green Fins Member</h3>
+                    <p>Committed to environmentally sustainable diving practices and marine ecosystem protection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Master Hurghada</h3>
+                    <p>Professional diving center offering world-class courses and unforgettable underwater experiences in the Red Sea.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="daily-trips.html">Daily Trips</a></p>
+                    <p><a href="courses.html">Diving Courses</a></p>
+                    <p><a href="price-list.html">Price List</a></p>
+                    <p><a href="blog.html">Blog</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hurghada Marina, Red Sea, Egypt</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@promasterhurghada.com</p>
+                    <p><i class="fas fa-clock"></i> Daily: 8:00 AM - 6:00 PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Certifications</h3>
+                    <p>PADI 5 Star Dive Center</p>
+                    <p>PADI EFR Training Center</p>
+                    <p>Red Sea Diving Association</p>
+                    <p>Egyptian Travel Agents Association</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pro Master Hurghada. All rights reserved. | Designed for professional diving experiences in the Red Sea.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let currentLanguage = 'en';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            initScrollEffects();
+            animateCounters();
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language selector
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langMap = {
+                'en': '🇺🇸 EN',
+                'de': '🇩🇪 DE', 
+                'pl': '🇵🇱 PL',
+                'fr': '🇫🇷 FR',
+                'ru': '🇷🇺 RU',
+                'it': '🇮🇹 IT',
+                'zh': '🇨🇳 ZH'
+            };
+            
+            document.querySelector('.language-btn').innerHTML = `<i class="fas fa-globe"></i> ${langMap[lang]}`;
+            document.getElementById('language-dropdown').classList.remove('active');
+            
+            console.log('Language changed to:', lang);
+        }
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 100;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                if (target === 98) {
+                                    counter.textContent = Math.ceil(current) + '%';
+                                } else {
+                                    counter.textContent = Math.ceil(current) + '+';
+                                }
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                if (target === 98) {
+                                    counter.textContent = target + '%';
+                                } else {
+                                    counter.textContent = target + '+';
+                                }
+                            }
+                        };
+                        
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Cart functions
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        // Scroll effects
+        function initScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('language-dropdown').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diving Courses - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+            --section-padding: 80px 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles (same as other pages) */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-dropdown.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown a:hover {
+            background: var(--light-blue);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            margin-top: 30px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            opacity: 0.6;
+        }
+
+        /* Course Grid Section */
+        .courses-section {
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .course-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--coral);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .course-level {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .course-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .course-features li {
+            padding: 5px 0;
+            color: var(--gray);
+        }
+
+        .course-features li i {
+            color: var(--coral);
+            width: 20px;
+        }
+
+        .course-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .course-button:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Course Details Section */
+        .course-details {
+            background: var(--light-blue);
+            padding: var(--section-padding);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 50px;
+            align-items: start;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .detail-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .detail-price {
+            font-size: 2rem;
+            color: var(--coral);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .detail-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .detail-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .detail-features li {
+            padding: 8px 0;
+            color: var(--gray);
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-features li:last-child {
+            border-bottom: none;
+        }
+
+        .detail-features li i {
+            color: var(--coral);
+            width: 25px;
+            font-size: 1.1rem;
+        }
+
+        .enroll-button {
+            background: var(--coral);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .enroll-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Certificate Section */
+        .certificate-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: var(--section-padding);
+            text-align: center;
+        }
+
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .certificate-item {
+            padding: 30px 20px;
+        }
+
+        .certificate-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .certificate-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .certificate-item p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: var(--section-padding);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--light-blue);
+            padding: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: #d6ebff;
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Footer (same as other pages) */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--coral);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .developer-credit {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .certificate-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .courses-section {
+                padding: 50px 0;
+            }
+
+            .course-card,
+            .detail-card {
+                margin: 0 10px;
+            }
+
+            .certificate-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="daily-trips.html">Daily Trips</a></li>
+                    <li><a href="courses.html" class="active">Courses</a></li>
+                    <li><a href="price-list.html">Price List</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 German</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polish</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 French</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Russian</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italian</a>
+                        <a href="#" onclick="changeLanguage('zh')">🇨🇳 Chinese</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" onclick="window.location.href='shopping-cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Diving Courses</h1>
+            <p>Professional PADI certified diving courses for all levels - from beginner to instructor</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Courses</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Grid Section -->
+    <!-- CMS Integration: Course content can be managed through admin panel -->
+    <section class="courses-section">
+        <div class="container">
+            <h2 class="section-title">All Courses</h2>
+            <p class="section-subtitle">Choose from our comprehensive range of PADI certified diving courses</p>
+            
+            <div class="courses-grid">
+                <!-- Beginner Courses -->
+                <!-- Discover Scuba Diving -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Beginner</div>
+                        <div class="course-price">€80</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Discover Scuba Diving</h3>
+                        <p class="course-description">Try scuba diving for the first time! No experience needed - just curiosity and adventure.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Pool session</li>
+                            <li><i class="fas fa-check"></i> Optional open water</li>
+                            <li><i class="fas fa-check"></i> Professional supervision</li>
+                            <li><i class="fas fa-check"></i> No certification needed</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Discover Scuba Diving', 80)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Scuba Diver -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Beginner</div>
+                        <div class="course-price">€250</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Scuba Diver</h3>
+                        <p class="course-description">Entry-level certification for those with limited time. Dive to 12m with professional supervision.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 3 theory sessions</li>
+                            <li><i class="fas fa-check"></i> Pool training</li>
+                            <li><i class="fas fa-check"></i> 2 open water dives</li>
+                            <li><i class="fas fa-check"></i> Professional supervision required</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Scuba Diver', 250)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Open Water Diver -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Beginner</div>
+                        <div class="course-price">€350</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Open Water Diver</h3>
+                        <p class="course-description">Your gateway to lifelong adventure. Learn fundamental diving skills and get certified to dive independently.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 5 theory sessions</li>
+                            <li><i class="fas fa-check"></i> Pool training</li>
+                            <li><i class="fas fa-check"></i> 4 open water dives</li>
+                            <li><i class="fas fa-check"></i> Independent diving</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Open Water Diver', 350)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Referral -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Beginner</div>
+                        <div class="course-price">€200</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">PADI Referral</h3>
+                        <p class="course-description">Complete your Open Water certification if you started training elsewhere. Finish your open water dives with us.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Complete open water dives</li>
+                            <li><i class="fas fa-check"></i> Skills review</li>
+                            <li><i class="fas fa-check"></i> PADI certification</li>
+                            <li><i class="fas fa-check"></i> Referral paperwork</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('PADI Referral', 200)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Advanced Open Water -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Advanced</div>
+                        <div class="course-price">€420</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Advanced Open Water</h3>
+                        <p class="course-description">Advance your skills and explore deeper waters. Includes specialty dives like deep diving and navigation.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 5 adventure dives</li>
+                            <li><i class="fas fa-check"></i> Deep diving specialty</li>
+                            <li><i class="fas fa-check"></i> Navigation skills</li>
+                            <li><i class="fas fa-check"></i> Dive to 30 meters</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Advanced Open Water', 420)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- EFR -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Advanced</div>
+                        <div class="course-price">€150</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Emergency First Response</h3>
+                        <p class="course-description">Learn life-saving emergency response skills. Required for Rescue Diver course.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> CPR training</li>
+                            <li><i class="fas fa-check"></i> First aid skills</li>
+                            <li><i class="fas fa-check"></i> Emergency procedures</li>
+                            <li><i class="fas fa-check"></i> Life-saving techniques</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Emergency First Response', 150)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Rescue Diver -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Advanced</div>
+                        <div class="course-price">€380</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Rescue Diver</h3>
+                        <p class="course-description">Learn to prevent and manage problems underwater. Become a more confident and capable diver.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Emergency response</li>
+                            <li><i class="fas fa-check"></i> Rescue techniques</li>
+                            <li><i class="fas fa-check"></i> Problem prevention</li>
+                            <li><i class="fas fa-check"></i> EFR certification</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Rescue Diver', 380)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Divemaster -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Professional</div>
+                        <div class="course-price">€650</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Divemaster</h3>
+                        <p class="course-description">Your first professional level certification. Learn to guide certified divers and assist instructors.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Leadership skills</li>
+                            <li><i class="fas fa-check"></i> Guide certification</li>
+                            <li><i class="fas fa-check"></i> Professional training</li>
+                            <li><i class="fas fa-check"></i> Career pathway</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Divemaster', 650)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Nitrox Specialty -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Advanced</div>
+                        <div class="course-price">€280</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Nitrox Specialty</h3>
+                        <p class="course-description">Learn to dive with enriched air nitrox for longer bottom times and shorter surface intervals.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Extended bottom time</li>
+                            <li><i class="fas fa-check"></i> Gas analysis</li>
+                            <li><i class="fas fa-check"></i> Theory & practice</li>
+                            <li><i class="fas fa-check"></i> Same day certification</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('Nitrox Specialty', 280)">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- PADI IDC -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                        <div class="course-level">Professional</div>
+                        <div class="course-price">€1200</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">PADI IDC</h3>
+                        <p class="course-description">Become a PADI instructor and share your passion for diving with others around the world.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Teaching methodology</li>
+                            <li><i class="fas fa-check"></i> Advanced theory</li>
+                            <li><i class="fas fa-check"></i> Professional standards</li>
+                            <li><i class="fas fa-check"></i> Instructor certification</li>
+                        </ul>
+                        <button class="course-button" onclick="addToCart('PADI IDC', 1200)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Details Section -->
+    <section class="course-details">
+        <div class="container">
+            <h2 class="section-title">Course Details</h2>
+            <p class="section-subtitle">Comprehensive information about all our PADI certified diving courses</p>
+            
+            <div class="details-grid">
+                <!-- Beginner Courses -->
+                <h3 style="grid-column: 1 / -1; text-align: center; color: var(--primary-blue); font-size: 2rem; margin: 40px 0 20px;">Beginner Courses</h3>
+                
+                <!-- Discover Scuba Diving -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">Discover Scuba Diving (PADI DSD)</h3>
+                    <div class="detail-price">€80</div>
+                    <p class="detail-description">Try scuba diving for the first time in a safe, controlled environment. No certification required - just curiosity and a sense of adventure. Perfect introduction to the underwater world.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-water"></i> Pool or shallow water session</li>
+                        <li><i class="fas fa-fish"></i> Optional open water dive</li>
+                        <li><i class="fas fa-graduation-cap"></i> Basic scuba skills introduction</li>
+                        <li><i class="fas fa-clock"></i> Half day program</li>
+                        <li><i class="fas fa-certificate"></i> No prerequisites required</li>
+                        <li><i class="fas fa-depth-chart"></i> Maximum depth 12 meters</li>
+                        <li><i class="fas fa-users"></i> Small group or private sessions</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Discover Scuba Diving', 80)">Enroll Now</button>
+                </div>
+
+                <!-- Scuba Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Scuba Diver</h3>
+                    <div class="detail-price">€250</div>
+                    <p class="detail-description">Perfect for those with limited time. This entry-level certification allows you to dive under professional supervision to 12 meters. Can be completed in just 2 days.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-graduation-cap"></i> 3 knowledge development sessions</li>
+                        <li><i class="fas fa-swimming-pool"></i> 3 confined water sessions</li>
+                        <li><i class="fas fa-fish"></i> 2 open water dives</li>
+                        <li><i class="fas fa-users"></i> Must dive with professional</li>
+                        <li><i class="fas fa-clock"></i> 2 days to complete</li>
+                        <li><i class="fas fa-depth-chart"></i> Certified to dive to 12 meters</li>
+                        <li><i class="fas fa-arrow-up"></i> Upgradeable to Open Water</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Scuba Diver', 250)">Enroll Now</button>
+                </div>
+
+                <!-- Scuba Diver Upgrade -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">Scuba Diver Upgrade</h3>
+                    <div class="detail-price">€150</div>
+                    <p class="detail-description">Already a PADI Scuba Diver? Upgrade to Open Water Diver with additional training. Complete your certification and gain full diving independence.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-graduation-cap"></i> 2 additional knowledge sessions</li>
+                        <li><i class="fas fa-swimming-pool"></i> 2 additional confined water sessions</li>
+                        <li><i class="fas fa-fish"></i> 2 additional open water dives</li>
+                        <li><i class="fas fa-certificate"></i> Full Open Water certification</li>
+                        <li><i class="fas fa-clock"></i> 2 days to complete</li>
+                        <li><i class="fas fa-depth-chart"></i> Dive to 18 meters independently</li>
+                        <li><i class="fas fa-users"></i> Dive with certified buddy</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Scuba Diver Upgrade', 150)">Enroll Now</button>
+                </div>
+
+                <!-- Referral -->
+                <div class="detail-card">
+                </div>
+
+                <!-- Referral -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Referral</h3>
+                    <div class="detail-price">€200</div>
+                    <p class="detail-description">Complete your Open Water certification if you started elsewhere. We'll complete your open water training dives and issue your PADI certification.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-check"></i> Complete open water training dives</li>
+                        <li><i class="fas fa-certificate"></i> PADI certification issued</li>
+                        <li><i class="fas fa-globe"></i> Valid worldwide</li>
+                        <li><i class="fas fa-clock"></i> 1-2 days to complete</li>
+                        <li><i class="fas fa-book"></i> Referral paperwork required</li>
+                        <li><i class="fas fa-depth-chart"></i> Dive to 18 meters</li>
+                        <li><i class="fas fa-swimming-pool"></i> Skills review if needed</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('PADI Referral', 200)">Enroll Now</button>
+                </div>
+
+                <!-- Open Water Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Open Water Diver</h3>
+                    <div class="detail-price">€350</div>
+                    <p class="detail-description">The world's most popular scuba course. Your gateway to lifelong adventure. Learn fundamental dive skills, safety concepts and underwater problem-solving to become a confident, capable diver.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-graduation-cap"></i> 5 knowledge development sessions</li>
+                        <li><i class="fas fa-swimming-pool"></i> 5 confined water training sessions</li>
+                        <li><i class="fas fa-fish"></i> 4 open water training dives</li>
+                        <li><i class="fas fa-certificate"></i> PADI Open Water Diver certification</li>
+                        <li><i class="fas fa-book"></i> Digital learning materials included</li>
+                        <li><i class="fas fa-clock"></i> 3-4 days to complete</li>
+                        <li><i class="fas fa-depth-chart"></i> Certified to dive to 18 meters</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Open Water Diver', 350)">Enroll Now</button>
+                </div>
+
+                <!-- Advanced Courses -->
+                <h3 style="grid-column: 1 / -1; text-align: center; color: var(--primary-blue); font-size: 2rem; margin: 60px 0 20px;">Advanced Courses</h3>
+
+                <!-- Adventure Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Adventure Diver</h3>
+                    <div class="detail-price">€180</div>
+                    <p class="detail-description">Get a taste of different diving specialties with 3 Adventure Dives. Perfect stepping stone between Open Water and Advanced Open Water.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-fish"></i> 3 Adventure Dives</li>
+                        <li><i class="fas fa-compass"></i> Choose from various specialties</li>
+                        <li><i class="fas fa-certificate"></i> Adventure Diver certification</li>
+                        <li><i class="fas fa-clock"></i> 1-2 days to complete</li>
+                        <li><i class="fas fa-arrow-up"></i> Credit toward Advanced Open Water</li>
+                        <li><i class="fas fa-depth-chart"></i> Dive to 30 meters (with Deep dive)</li>
+                        <li><i class="fas fa-graduation-cap"></i> Skill building focus</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Adventure Diver', 180)">Enroll Now</button>
+                </div>
+
+                <!-- Advanced Open Water -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Advanced Open Water</h3>
+                    <div class="detail-price">€420</div>
+                    <p class="detail-description">Build confidence and advance your skills. Choose 2 required Adventure Dives – Deep and Underwater Navigation – plus 3 more Adventure Dives that match your interests.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-compass"></i> Underwater Navigation dive</li>
+                        <li><i class="fas fa-arrow-down"></i> Deep Water dive (to 30m)</li>
+                        <li><i class="fas fa-camera"></i> Underwater Photography option</li>
+                        <li><i class="fas fa-fish"></i> Fish Identification specialty</li>
+                        <li><i class="fas fa-mountain"></i> Peak Performance Buoyancy</li>
+                        <li><i class="fas fa-calendar"></i> 2-3 days to complete</li>
+                        <li><i class="fas fa-certificate"></i> Advanced Open Water certification</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Advanced Open Water', 420)">Enroll Now</button>
+                </div>
+
+                <!-- EFR -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">Emergency First Response (EFR)</h3>
+                    <div class="detail-price">€150</div>
+                    <p class="detail-description">Learn life-saving emergency response skills. Required prerequisite for Rescue Diver course. Valuable skills for diving and everyday life.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-heart"></i> Primary Care (CPR)</li>
+                        <li><i class="fas fa-band-aid"></i> Secondary Care (First Aid)</li>
+                        <li><i class="fas fa-phone"></i> Emergency response procedures</li>
+                        <li><i class="fas fa-certificate"></i> EFR certification</li>
+                        <li><i class="fas fa-clock"></i> 1 day to complete</li>
+                        <li><i class="fas fa-graduation-cap"></i> Hands-on practice</li>
+                        <li><i class="fas fa-shield-alt"></i> Life-saving skills</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Emergency First Response', 150)">Enroll Now</button>
+                </div>
+
+                <!-- Rescue Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Rescue Diver</h3>
+                    <div class="detail-price">€380</div>
+                    <p class="detail-description">Learn to prevent and manage problems underwater. Become a more confident and capable diver while learning to help others in emergency situations.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-shield-alt"></i> Emergency response techniques</li>
+                        <li><i class="fas fa-users"></i> Rescue scenarios practice</li>
+                        <li><i class="fas fa-brain"></i> Problem prevention skills</li>
+                        <li><i class="fas fa-heart"></i> EFR certification required</li>
+                        <li><i class="fas fa-clock"></i> 3-4 days to complete</li>
+                        <li><i class="fas fa-certificate"></i> Rescue Diver certification</li>
+                        <li><i class="fas fa-graduation-cap"></i> Leadership development</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Rescue Diver', 380)">Enroll Now</button>
+                </div>
+
+                <!-- Specialty Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Specialty Diver</h3>
+                    <div class="detail-price">€280</div>
+                    <p class="detail-description">Explore your diving interests with specialty courses. Choose from Nitrox, Deep, Wreck, Night, Photography, and many more specialized skills.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-star"></i> Various specialty options</li>
+                        <li><i class="fas fa-graduation-cap"></i> Focused skill development</li>
+                        <li><i class="fas fa-certificate"></i> Specialty certification</li>
+                        <li><i class="fas fa-clock"></i> 1-2 days per specialty</li>
+                        <li><i class="fas fa-fish"></i> 2-4 training dives</li>
+                        <li><i class="fas fa-book"></i> Specialized knowledge</li>
+                        <li><i class="fas fa-arrow-up"></i> Credit toward Master Diver</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Specialty Diver', 280)">Enroll Now</button>
+                </div>
+
+                <!-- Master Diver -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Master Scuba Diver</h3>
+                    <div class="detail-price">€100</div>
+                    <p class="detail-description">The highest non-professional rating. Requires Rescue Diver, 5 specialties, and 50 logged dives. Recognition of your commitment to diving excellence.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-trophy"></i> Highest recreational rating</li>
+                        <li><i class="fas fa-certificate"></i> Rescue Diver required</li>
+                        <li><i class="fas fa-star"></i> 5 specialty certifications</li>
+                        <li><i class="fas fa-book"></i> 50 logged dives minimum</li>
+                        <li><i class="fas fa-award"></i> Master Diver recognition</li>
+                        <li><i class="fas fa-graduation-cap"></i> Elite diver status</li>
+                        <li><i class="fas fa-globe"></i> Worldwide recognition</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Master Scuba Diver', 100)">Enroll Now</button>
+                </div>
+
+                <!-- Professional Courses -->
+                <h3 style="grid-column: 1 / -1; text-align: center; color: var(--primary-blue); font-size: 2rem; margin: 60px 0 20px;">Professional Courses</h3>
+
+                <!-- Divemaster -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Divemaster</h3>
+                    <div class="detail-price">€650</div>
+                    <p class="detail-description">Your first professional level certification. Learn to guide certified divers, assist instructors, and take the first step toward a diving career.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-users"></i> Leadership skills development</li>
+                        <li><i class="fas fa-certificate"></i> Professional certification</li>
+                        <li><i class="fas fa-graduation-cap"></i> Assist with training</li>
+                        <li><i class="fas fa-compass"></i> Guide certified divers</li>
+                        <li><i class="fas fa-clock"></i> 2-4 weeks to complete</li>
+                        <li><i class="fas fa-book"></i> 60 logged dives required</li>
+                        <li><i class="fas fa-briefcase"></i> Career pathway</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Divemaster', 650)">Enroll Now</button>
+                </div>
+
+                <!-- PADI IDC -->
+                <div class="detail-card">
+                    <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 class="detail-title">PADI Instructor Development Course (IDC)</h3>
+                    <div class="detail-price">€1200</div>
+                    <p class="detail-description">Become a PADI instructor and share your passion for diving. Comprehensive training in teaching methodology, diving theory, and professional standards.</p>
+                    <ul class="detail-features">
+                        <li><i class="fas fa-chalkboard-teacher"></i> Teaching methodology</li>
+                        <li><i class="fas fa-graduation-cap"></i> Advanced diving theory</li>
+                        <li><i class="fas fa-users"></i> Student management</li>
+                        <li><i class="fas fa-certificate"></i> PADI Instructor certification</li>
+                        <li><i class="fas fa-clock"></i> 6-8 days intensive training</li>
+                        <li><i class="fas fa-globe"></i> Teach worldwide</li>
+                        <li><i class="fas fa-briefcase"></i> Professional career</li>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('PADI IDC', 1200)">Enroll Now</button>
+                    </ul>
+                    <button class="enroll-button" onclick="addToCart('Advanced Open Water', 420)">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Why Choose PADI Certification?</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">PADI is the world's leading scuba diving training organization</p>
+            
+            <div class="certificate-grid">
+                <div class="certificate-item">
+                    <div class="certificate-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Global Recognition</h3>
+                    <p>PADI certifications are recognized and respected worldwide by dive centers and resorts in over 183 countries.</p>
+                </div>
+                
+                <div class="certificate-item">
+                    <div class="certificate-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety Standards</h3>
+                    <p>PADI maintains the highest safety standards in the industry with proven training methods and quality assurance.</p>
+                </div>
+                
+                <div class="certificate-item">
+                    <div class="certificate-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Quality Training</h3>
+                    <p>Professional instructors, modern equipment, and comprehensive curriculum ensure the best learning experience.</p>
+                </div>
+                
+                <div class="certificate-item">
+                    <div class="certificate-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>Join millions of PADI divers worldwide and become part of the largest diving community on the planet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Common questions about our diving courses</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What is the minimum age for diving courses?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The minimum age for PADI Open Water Diver course is 10 years old. Junior Open Water Divers (ages 10-14) must dive with a PADI Professional or certified parent/guardian and are limited to maximum depths of 12 meters.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Do I need to know how to swim?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, basic swimming skills are required. You need to be able to swim at least 200 meters (any stroke) and tread water for 10 minutes. Don't worry if you're not an Olympic swimmer - basic comfort in water is sufficient.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What's included in the course price?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All course prices include instruction, digital learning materials, use of all scuba equipment during training, certification processing fees, and refreshments during breaks. Accommodation and meals are not included unless specified.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How long does it take to complete a course?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Course duration varies: Open Water (3-4 days), Advanced Open Water (2-3 days), Rescue Diver (3-4 days), and specialty courses (1-2 days). We can adjust schedules to fit your vacation timeframe.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I start my course online?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! PADI eLearning allows you to complete the knowledge development portion online before your trip. This saves time and lets you focus on the fun parts - pool and open water training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Master Hurghada</h3>
+                    <p>Professional diving center offering world-class courses and unforgettable underwater experiences in the Red Sea.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="daily-trips.html">Daily Trips</a></p>
+                    <p><a href="courses.html">Diving Courses</a></p>
+                    <p><a href="price-list.html">Price List</a></p>
+                    <p><a href="blog.html">Blog</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hurghada Marina, Red Sea, Egypt</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@promasterhurghada.com</p>
+                    <p><i class="fas fa-clock"></i> Daily: 8:00 AM - 6:00 PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Certifications</h3>
+                    <p>PADI 5 Star Dive Center</p>
+                    <p>PADI EFR Training Center</p>
+                    <p>Red Sea Diving Association</p>
+                    <p>Egyptian Travel Agents Association</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pro Master Hurghada. All rights reserved. | Designed for professional diving experiences in the Red Sea.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let currentLanguage = 'en';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            initScrollEffects();
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language selector
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langMap = {
+                'en': '🇺🇸 EN',
+                'de': '🇩🇪 DE', 
+                'pl': '🇵🇱 PL',
+                'fr': '🇫🇷 FR',
+                'ru': '🇷🇺 RU',
+                'it': '🇮🇹 IT',
+                'zh': '🇨🇳 ZH'
+            };
+            
+            document.querySelector('.language-btn').innerHTML = `<i class="fas fa-globe"></i> ${langMap[lang]}`;
+            document.getElementById('language-dropdown').classList.remove('active');
+            
+            console.log('Language changed to:', lang);
+        }
+
+        // Shopping cart functions
+        function addToCart(itemName, price) {
+            const existingItem = cartItems.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: itemName,
+                    price: price,
+                    quantity: 1,
+                    type: 'course'
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+            showNotification(`${itemName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        // FAQ toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('.faq-question i').forEach(ic => {
+                if (ic !== icon) {
+                    ic.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current FAQ
+            answer.classList.toggle('active');
+            
+            if (answer.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--coral);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                z-index: 10000;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Scroll effects
+        function initScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('language-dropdown').classList.remove('active');
+            }
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const question = faqItem.querySelector('.faq-question');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.querySelector('.faq-answer').classList.remove('active');
+                    item.querySelector('.faq-question').classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ item
+            answer.classList.toggle('active');
+            question.classList.toggle('active');
+        }
+
+        // Add CSS animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

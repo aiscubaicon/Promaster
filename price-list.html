@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price List - Pro Master Hurghada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0077BE;
+            --secondary-blue: #004d75;
+            --coral: #FF6B6B;
+            --light-blue: #E6F3FF;
+            --white: #FFFFFF;
+            --gray: #666;
+            --dark-gray: #333;
+            --section-padding: 80px 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles (same as other pages) */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-dropdown.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown a:hover {
+            background: var(--light-blue);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-blue);
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--coral);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            margin-top: 30px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            opacity: 0.6;
+        }
+
+        /* Price Sections */
+        .price-section {
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Price Table Styles */
+        .price-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .table-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .table-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .table-header p {
+            opacity: 0.9;
+        }
+
+        .table-content {
+            padding: 0;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-row:hover {
+            background: var(--light-blue);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--coral);
+            margin-right: 20px;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .add-to-cart-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Alternating backgrounds */
+        .price-section:nth-child(even) {
+            background: var(--light-blue);
+        }
+
+        /* Equipment rental special styling */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .equipment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .equipment-icon {
+            font-size: 3rem;
+            color: var(--coral);
+            margin-bottom: 20px;
+        }
+
+        .equipment-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .equipment-prices {
+            margin-bottom: 25px;
+        }
+
+        .equipment-prices div {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .equipment-prices div:last-child {
+            border-bottom: none;
+        }
+
+        /* Special Offers Section */
+        .special-offers {
+            background: var(--coral);
+            color: white;
+            padding: var(--section-padding);
+            text-align: center;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .offer-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .offer-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .offer-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .offer-description {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .offer-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .offer-original {
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-size: 1.2rem;
+        }
+
+        /* Payment Info Section */
+        .payment-info {
+            padding: var(--section-padding);
+            background: var(--light-blue);
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .payment-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .payment-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Footer (same as other pages) */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--coral);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--coral);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 30px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .developer-credit {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 20px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .price-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .item-price {
+                text-align: center;
+                margin-right: 0;
+            }
+
+            .equipment-grid,
+            .offers-grid,
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .price-section {
+                padding: 50px 0;
+            }
+
+            .price-table {
+                margin: 0 10px 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pro Master Hurghada</a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="daily-trips.html">Daily Trips</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="price-list.html" class="active">Price List</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguageDropdown()">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en')">🇺🇸 English</a>
+                        <a href="#" onclick="changeLanguage('de')">🇩🇪 German</a>
+                        <a href="#" onclick="changeLanguage('pl')">🇵🇱 Polish</a>
+                        <a href="#" onclick="changeLanguage('fr')">🇫🇷 French</a>
+                        <a href="#" onclick="changeLanguage('ru')">🇷🇺 Russian</a>
+                        <a href="#" onclick="changeLanguage('it')">🇮🇹 Italian</a>
+                        <a href="#" onclick="changeLanguage('zh')">🇨🇳 Chinese</a>
+                    </div>
+                </div>
+                
+                <div class="cart-icon" onclick="window.location.href='shopping-cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Price List</h1>
+            <p>Transparent pricing for all our diving courses, trips, and equipment rental</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Price List</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diving Courses Prices -->
+    <!-- CMS Integration: Price content can be managed through admin panel -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Diving Courses</h2>
+            <p class="section-subtitle">PADI certified diving courses with professional instruction</p>
+            
+            <div class="price-table">
+                <div class="table-header">
+                    <h3>PADI Certifications</h3>
+                    <p>World-recognized diving certifications</p>
+                </div>
+                <div class="table-content">
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Open Water Course</div>
+                            <div class="item-description">Your first diving certification - dive to 18m</div>
+                        </div>
+                        <div class="item-price">€350</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Open Water Course', 350, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Advanced Open Water</div>
+                            <div class="item-description">Advance your skills - dive to 30m</div>
+                        </div>
+                        <div class="item-price">€310</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Advanced Open Water', 310, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Rescue Diver + EFR</div>
+                            <div class="item-description">Learn emergency response and rescue techniques</div>
+                        </div>
+                        <div class="item-price">€465</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Rescue Diver + EFR', 465, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Dive Master</div>
+                            <div class="item-description">Professional level - guide certified divers</div>
+                        </div>
+                        <div class="item-price">€750</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Dive Master', 750, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Discover Scuba Diving</div>
+                            <div class="item-description">Try scuba diving for the first time</div>
+                        </div>
+                        <div class="item-price">€55</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Discover Scuba Diving', 55, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Scuba Diver</div>
+                            <div class="item-description">Basic certification for supervised diving</div>
+                        </div>
+                        <div class="item-price">€270</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Scuba Diver', 270, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI Adventure Diver</div>
+                            <div class="item-description">Complete 3 adventure dives</div>
+                        </div>
+                        <div class="item-price">€215</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI Adventure Diver', 215, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Instructor Development Course</div>
+                            <div class="item-description">Become a PADI instructor</div>
+                        </div>
+                        <div class="item-price">€1200</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Instructor Development Course', 1200, 'course')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialty Courses -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Specialty Courses</h2>
+            <p class="section-subtitle">Specialized diving skills and techniques</p>
+            
+            <div class="price-table">
+                <div class="table-header">
+                    <h3>PADI Specialties</h3>
+                    <p>Enhance your diving skills with specialized training</p>
+                </div>
+                <div class="table-content">
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">PADI EAN Course</div>
+                            <div class="item-description">Extended bottom times with enriched air</div>
+                        </div>
+                        <div class="item-price">€155</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('PADI EAN Course', 155, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Specialty Dive</div>
+                            <div class="item-description">Single specialty diving experience</div>
+                        </div>
+                        <div class="item-price">€65</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Specialty Dive', 65, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 PADI Adventure Dive</div>
+                            <div class="item-description">Single adventure dive experience</div>
+                        </div>
+                        <div class="item-price">€50</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 PADI Adventure Dive', 50, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Private Guide Per Day (2 Dives)</div>
+                            <div class="item-description">Personal dive guide for the day</div>
+                        </div>
+                        <div class="item-price">€50</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Private Guide Per Day (2 Dives)', 50, 'course')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Private Instructor (Per Course)</div>
+                            <div class="item-description">One-on-one instruction for any course</div>
+                        </div>
+                        <div class="item-price">€120</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Private Instructor (Per Course)', 120, 'course')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Trips -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Intro Dives & Daily Trips</h2>
+            <p class="section-subtitle">Try diving or explore the Red Sea's most beautiful dive sites</p>
+            
+            <div class="price-table">
+                <div class="table-header">
+                    <h3>Intro Dives & Trip Packages</h3>
+                    <p>First-time diving experiences and daily trips</p>
+                </div>
+                <div class="table-content">
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Intro Dive Beach</div>
+                            <div class="item-description">First diving experience from the beach</div>
+                        </div>
+                        <div class="item-price">€20</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Intro Dive Beach', 20, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">2 Intro Dives Beach</div>
+                            <div class="item-description">Two intro dives from the beach</div>
+                        </div>
+                        <div class="item-price">€30</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('2 Intro Dives Beach', 30, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Intro Dive Boat</div>
+                            <div class="item-description">First diving experience from boat</div>
+                        </div>
+                        <div class="item-price">€35</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Intro Dive Boat', 35, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">2 Intro Dives Boat</div>
+                            <div class="item-description">Two intro dives from boat</div>
+                        </div>
+                        <div class="item-price">€40</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('2 Intro Dives Boat', 40, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Day - 2 Dives Boat</div>
+                            <div class="item-description">Boat diving with 2 dives - includes lunch</div>
+                        </div>
+                        <div class="item-price">€40</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Day - 2 Dives Boat', 40, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">3 Days - 6 Dives Boat</div>
+                            <div class="item-description">3-day boat diving package with 6 dives total</div>
+                        </div>
+                        <div class="item-price">€110</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('3 Days - 6 Dives Boat', 110, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">5 Days - 10 Dives Boat</div>
+                            <div class="item-description">5-day boat diving package with 10 dives total</div>
+                        </div>
+                        <div class="item-price">€180</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('5 Days - 10 Dives Boat', 180, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">More Than 5 Days (Per Day)</div>
+                            <div class="item-description">Extended diving packages - price per additional day</div>
+                        </div>
+                        <div class="item-price">€30</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Extended Diving (Per Day)', 30, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Beach Dive</div>
+                            <div class="item-description">Single shore dive from the beach</div>
+                        </div>
+                        <div class="item-price">€25</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Beach Dive', 25, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">2 Beach Dives</div>
+                            <div class="item-description">Two shore dives from the beach</div>
+                        </div>
+                        <div class="item-price">€35</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('2 Beach Dives', 35, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Beach Night Dive</div>
+                            <div class="item-description">Night diving experience from the beach</div>
+                        </div>
+                        <div class="item-price">€40</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Beach Night Dive', 40, 'trip')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Extra Boat Dive</div>
+                            <div class="item-description">Additional boat dive</div>
+                        </div>
+                        <div class="item-price">€10</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Extra Boat Dive', 10, 'trip')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Rental -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Equipment Rental & Tanks</h2>
+            <p class="section-subtitle">High-quality diving equipment and tank rentals</p>
+            
+            <div class="equipment-grid">
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-mask"></i>
+                    </div>
+                    <h3 class="equipment-title">Complete Scuba Set</h3>
+                    <div class="equipment-prices">
+                        <div><span>Per Dive</span><span>€15</span></div>
+                        <div><span>Per Day</span><span>€25</span></div>
+                        <div><span>3 Days</span><span>€60</span></div>
+                        <div><span>Per Week</span><span>€120</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Complete Scuba Set - Per Dive', 15, 'equipment')">Add Per Dive</button>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-vest"></i>
+                    </div>
+                    <h3 class="equipment-title">BCD & Regulator</h3>
+                    <div class="equipment-prices">
+                        <div><span>Per Dive</span><span>€10</span></div>
+                        <div><span>Per Day</span><span>€18</span></div>
+                        <div><span>3 Days</span><span>€45</span></div>
+                        <div><span>Per Week</span><span>€90</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('BCD & Regulator - Per Dive', 10, 'equipment')">Add Per Dive</button>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3 class="equipment-title">Wetsuit & Fins</h3>
+                    <div class="equipment-prices">
+                        <div><span>Per Dive</span><span>€8</span></div>
+                        <div><span>Per Day</span><span>€12</span></div>
+                        <div><span>3 Days</span><span>€30</span></div>
+                        <div><span>Per Week</span><span>€60</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Wetsuit & Fins - Per Dive', 8, 'equipment')">Add Per Dive</button>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="equipment-title">Underwater Camera</h3>
+                    <div class="equipment-prices">
+                        <div><span>Per Dive</span><span>€20</span></div>
+                        <div><span>Per Day</span><span>€35</span></div>
+                        <div><span>3 Days</span><span>€90</span></div>
+                        <div><span>Per Week</span><span>€180</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Underwater Camera - Per Dive', 20, 'equipment')">Add Per Dive</button>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-air-freshener"></i>
+                    </div>
+                    <h3 class="equipment-title">Tank Rentals</h3>
+                    <div class="equipment-prices">
+                        <div><span>12L Nitrox Tank</span><span>€5</span></div>
+                        <div><span>15L Nitrox Tank</span><span>€8</span></div>
+                        <div><span>15L Air Tank</span><span>€5</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('12L Nitrox Tank', 5, 'equipment')">Add Nitrox 12L</button>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="equipment-title">Dive Computer</h3>
+                    <div class="equipment-prices">
+                        <div><span>Per Dive</span><span>€5</span></div>
+                        <div><span>Per Day</span><span>€8</span></div>
+                        <div><span>3 Days</span><span>€20</span></div>
+                        <div><span>Per Week</span><span>€40</span></div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Dive Computer - Per Dive', 5, 'equipment')">Add Per Dive</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transfer Services -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Transfer Services</h2>
+            <p class="section-subtitle">Convenient transportation to and from dive sites</p>
+            
+            <div class="price-table">
+                <div class="table-header">
+                    <h3>Transportation</h3>
+                    <p>Safe and reliable transfer services</p>
+                </div>
+                <div class="table-content">
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Transfer Inside Hurghada</div>
+                            <div class="item-description">Transportation within Hurghada city</div>
+                        </div>
+                        <div class="item-price">€8</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Transfer Inside Hurghada', 8, 'service')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Transfer Outside Hurghada</div>
+                            <div class="item-description">Transportation outside Hurghada - upon request</div>
+                        </div>
+                        <div class="item-price">Upon Request</div>
+                        <button class="add-to-cart-btn" onclick="showNotification('Please contact us for transfer pricing outside Hurghada')">Contact Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merchandise -->
+    <section class="price-section">
+        <div class="container">
+            <h2 class="section-title">Pro Master Merchandise</h2>
+            <p class="section-subtitle">Take home a piece of your diving adventure</p>
+            
+            <div class="price-table">
+                <div class="table-header">
+                    <h3>Merchandise & Accessories</h3>
+                    <p>Quality diving accessories and branded items</p>
+                </div>
+                <div class="table-content">
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Pro Master Back-Bag</div>
+                            <div class="item-description">Durable diving gear bag</div>
+                        </div>
+                        <div class="item-price">€20</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Pro Master Back-Bag', 20, 'merchandise')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Pro Master T-Shirt</div>
+                            <div class="item-description">Comfortable diving center t-shirt</div>
+                        </div>
+                        <div class="item-price">€20</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Pro Master T-Shirt', 20, 'merchandise')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Pro Master Towel Robe</div>
+                            <div class="item-description">Luxury towel robe for after diving</div>
+                        </div>
+                        <div class="item-price">€35</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Pro Master Towel Robe', 35, 'merchandise')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Pro Master Logbook</div>
+                            <div class="item-description">Professional diving logbook</div>
+                        </div>
+                        <div class="item-price">€5</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Pro Master Logbook', 5, 'merchandise')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">Pro Master Towel</div>
+                            <div class="item-description">Quick-dry diving towel</div>
+                        </div>
+                        <div class="item-price">€20</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Pro Master Towel', 20, 'merchandise')">Add to Cart</button>
+                    </div>
+                    
+                    <div class="price-row">
+                        <div class="item-info">
+                            <div class="item-name">1 Mouthpiece</div>
+                            <div class="item-description">Replacement regulator mouthpiece</div>
+                        </div>
+                        <div class="item-price">€5</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('1 Mouthpiece', 5, 'merchandise')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="special-offers">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Special Offers</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Limited time deals and package discounts</p>
+            
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-badge">Student Discount</div>
+                    <h3 class="offer-title">Open Water + Advanced</h3>
+                    <p class="offer-description">Complete both courses together and save big!</p>
+                    <div class="offer-price">€600</div>
+                    <div class="offer-original">Regular: €660</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Open Water + Advanced Package', 600, 'course')" style="background: white; color: var(--coral); margin-top: 20px;">Add to Cart</button>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-badge">Group Deal</div>
+                    <h3 class="offer-title">4+ People Discount</h3>
+                    <p class="offer-description">Groups of 4 or more get 15% off all courses</p>
+                    <div class="offer-price">15% OFF</div>
+                    <div class="offer-original">Applied at checkout</div>
+                    <button class="add-to-cart-btn" onclick="showNotification('Group discount applied automatically for 4+ people!')" style="background: white; color: var(--coral); margin-top: 20px;">Auto Applied</button>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-badge">Early Bird</div>
+                    <h3 class="offer-title">Book 30 Days Ahead</h3>
+                    <p class="offer-description">Book your course 30+ days in advance for extra savings</p>
+                    <div class="offer-price">10% OFF</div>
+                    <div class="offer-original">All courses</div>
+                    <button class="add-to-cart-btn" onclick="showNotification('Early bird discount applied for advance bookings!')" style="background: white; color: var(--coral); margin-top: 20px;">Auto Applied</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Information -->
+    <section class="payment-info">
+        <div class="container">
+            <h2 class="section-title">Payment Information</h2>
+            <p class="section-subtitle">Flexible payment options for your convenience</p>
+            
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Cards Accepted</h3>
+                    <p>We accept all major credit cards including Visa, Mastercard, and American Express. Secure payment processing with SSL encryption.</p>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Cash Payments</h3>
+                    <p>Cash payments accepted in EUR, USD, or Egyptian Pounds. Pay at our dive center or upon course completion.</p>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Payment Plans</h3>
+                    <p>Flexible payment plans available for multi-day courses. Pay 50% deposit to secure your booking, balance before course starts.</p>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-undo-alt"></i>
+                    </div>
+                    <h3>Cancellation Policy</h3>
+                    <p>Free cancellation up to 48 hours before course start. Weather-related cancellations are fully refundable or rescheduled.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Master Hurghada</h3>
+                    <p>Professional diving center offering world-class courses and unforgettable underwater experiences in the Red Sea.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="daily-trips.html">Daily Trips</a></p>
+                    <p><a href="courses.html">Diving Courses</a></p>
+                    <p><a href="price-list.html">Price List</a></p>
+                    <p><a href="blog.html">Blog</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hurghada Marina, Red Sea, Egypt</p>
+                    <p><i class="fas fa-phone"></i> +20 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@promasterhurghada.com</p>
+                    <p><i class="fas fa-clock"></i> Daily: 8:00 AM - 6:00 PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Certifications</h3>
+                    <p>PADI 5 Star Dive Center</p>
+                    <p>PADI EFR Training Center</p>
+                    <p>Red Sea Diving Association</p>
+                    <p>Egyptian Travel Agents Association</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pro Master Hurghada. All rights reserved. | Designed for professional diving experiences in the Red Sea.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let currentLanguage = 'en';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            initScrollEffects();
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Language selector
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langMap = {
+                'en': '🇺🇸 EN',
+                'de': '🇩🇪 DE', 
+                'pl': '🇵🇱 PL',
+                'fr': '🇫🇷 FR',
+                'ru': '🇷🇺 RU',
+                'it': '🇮🇹 IT',
+                'zh': '🇨🇳 ZH'
+            };
+            
+            document.querySelector('.language-btn').innerHTML = `<i class="fas fa-globe"></i> ${langMap[lang]}`;
+            document.getElementById('language-dropdown').classList.remove('active');
+            
+            console.log('Language changed to:', lang);
+        }
+
+        // Shopping cart functions
+        function addToCart(itemName, price, type = 'course') {
+            const existingItem = cartItems.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: Date.now(),
+                    name: itemName,
+                    price: price,
+                    quantity: 1,
+                    type: type
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+            showNotification(`${itemName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--coral);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                z-index: 10000;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Scroll effects
+        function initScrollEffects() {
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.getElementById('language-dropdown').classList.remove('active');
+            }
+        });
+
+        // Add CSS animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
